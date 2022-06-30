@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
         $sections = [];
         foreach ($xmlCategories as $category) {
             $section = new Section();
-            $section->setName($category->getName());
+            $section->setName($category);
             $xmlId = (string)$category->attributes()->id ?? null;
             $section->setXmlId($xmlId);
             $sections[$xmlId] = $section;
@@ -74,7 +74,7 @@ class AppFixtures extends Fixture
         $xmlOffers = $simpleXml->shop->offers->offer;
         $productCount = 0;
         $output->writeln("offers processing...");
-        $progressBar = new ProgressBar($output, min(count($xmlOffers) , self::OFFERS_COUNT));
+        $progressBar = new ProgressBar($output, min(count($xmlOffers), self::OFFERS_COUNT));
         foreach ($xmlOffers as $xmlOffer) {
             if (++$productCount > self::OFFERS_COUNT) {
                 break;
@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
             $offer->setUnit('шт.');
             $offer->setQuantity((int)$xmlOffer->attributes()->quantity);
 
-            $pictureUrl = (string)$xmlOffer->picture[0];
+            $pictureUrl = (string)$xmlOffer->picture;
             if (!empty($pictureUrl)) {
                 $offer->setPicture($this->savePicture($pictureUrl));
             }
@@ -144,23 +144,26 @@ class AppFixtures extends Fixture
         $output->writeln("Flush to database finished");
     }
 
-    private function savePicture(string $pictureUrl) : ?string
+    private function savePicture(string $pictureUrl): ?string
     {
         $filesystem = new Filesystem();
         if (empty($pictureUrl)) {
             return null;
         }
+        $output = new ConsoleOutput();
 
-        $fileContent =  file_get_contents($pictureUrl);
+        $fileContent = file_get_contents($pictureUrl);
         if (empty($fileContent)) {
             return null;
         }
+
         $tempName = $filesystem->tempnam('/tmp', 'offer_picture_');
         $filesystem->dumpFile($tempName, $fileContent);
 
         $fileData = pathinfo($pictureUrl);
         $file = new UploadedFile($tempName, $fileData['basename']);
-        if ($file->guessExtension() !== 'jpeg' || $file->getSize() > 10 * 1024 * 1024) {
+
+        if ($file->guessExtension() !== 'jpg' || $file->getSize() > 10 * 1024 * 1024) {
             return null;
         }
         $newFileName = sha1($pictureUrl . uniqid()) . '.jpeg';
@@ -170,7 +173,7 @@ class AppFixtures extends Fixture
         }
         try {
             $filesystem->rename($tempName, self::UPLOAD_DIR . '/' . $dir . '/' . $newFileName);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return null;
         }
         return $dir . '/' . $newFileName;
