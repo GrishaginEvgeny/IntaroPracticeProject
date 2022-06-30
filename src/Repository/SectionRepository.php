@@ -19,32 +19,40 @@ class SectionRepository extends ServiceEntityRepository
         parent::__construct($registry, Section::class);
     }
 
-    // /**
-    //  * @return Section[] Returns an array of Section objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return array
+     * Разделы первого уровня
+     */
+    public function firstLevelCatalogSections(): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $entityManager = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Section
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $entityManager->createQuery(
+          'SELECT s.id AS id, 
+                   s.name AS name 
+               FROM App\Entity\Section s
+               WHERE s.parent IS NULL'
+        );
+
+        return $query->getResult();
     }
-    */
+
+    /**
+     * @param int $id
+     * @return array
+     * Дочерние секции раздела
+     */
+    public function childSections(int $id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s.id AS id, 
+                   s.name AS name 
+               FROM App\Entity\Section s
+               WHERE s.parent = :id'
+        )->setParameter('id', $id);
+
+        return $query->getResult();
+    }
 }
