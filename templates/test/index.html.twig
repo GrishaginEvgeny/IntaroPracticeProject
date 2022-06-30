@@ -13,8 +13,7 @@
     <ul>
         {% for section in firstLevelCatalogSections %}
         <li>
-            {{ section.id }}
-            {{ section.name }}
+            <img src="{{ 'upload/pictures/' ~ section.picture }}" alt="alt">
         </li>
         {% endfor %}
     </ul>
