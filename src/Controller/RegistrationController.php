@@ -20,7 +20,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
-    private const apiKey = "eVsrX4drzsw35chftqiSbTbGgbLtaPbN";
+    private $apiKey;
     private SimpleClientFactory $clientFactory;
     
     public function __construct(SimpleClientFactory $clientFactory)
@@ -30,20 +30,12 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        // $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', self::apiKey);
-        // $userRequest = new UsersRequest();
-        // $userRequest->filter = new ApiUserFilter();
-        // $userRequest->filter->email = "test@example.com";
-        // $response = $client->users->list($userRequest);
-        // dd($response);
-
+    { 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
@@ -54,12 +46,18 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', self::apiKey);
+
+            if (!($crmConfig= parse_ini_file("../config/apiKey.ini"))) {
+                throw new FileNotFoundException("../config/apiKey.ini");
+            }
+            $this->apiKey =$crmConfig['apiKey'];
+
+            $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
             $request = new CustomersCreateRequest();
             $request->customer = new Customer();
             
             $request->site = 'practice-2022';
-            $request->customer->externalId = (string)$user->getId();// '23918738721378131';
+            $request->customer->externalId = (string)$user->getId();
             $request->customer->email = $form->get('email')->getData();
             $request->customer->firstName = $form->get('firstname')->getData();
             $request->customer->lastName = $form->get('lastname')->getData();
@@ -67,11 +65,14 @@ class RegistrationController extends AbstractController
             $request->customer->phones = [new CustomerPhone()];
             $request->customer->phones[0]->number = $form->get('phone')->getData();
             $request->customer->birthday = $form->get('birthdate')->getData();
+            $request->customer->sex = $form->get('sex')->getData();
+
 
             try {
                 $response = $client->customers->create($request);
             } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
                 echo $exception; // Every ApiExceptionInterface instance should implement __toString() method.
+                $entityManager->remove($user);
                 exit(-1);
             }  
 

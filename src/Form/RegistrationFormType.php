@@ -13,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -89,6 +91,19 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Дата рождения',
                 'required' => false,
                 'years' => range(1940, 2018)
+            ])
+            // ->add('sex', RadioType::class,[
+            //     "mapped" => false,
+            //     'label' => 'Пол',
+            //     'required' => false,
+            ->add('sex', ChoiceType::class, [
+                "mapped" => false,
+                'label' => 'Пол',
+                'choices' => [
+                    'Женский' => 'Женский',
+                    'Мужской' => 'Мужской',
+                ],
+            'expanded' => true
             ])
         ;
     }
