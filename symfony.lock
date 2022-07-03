@@ -45,6 +45,16 @@
         },
         "files": [
             "./config/packages/nyholm_psr7.yaml"
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "phpunit/phpunit": {
@@ -288,6 +298,28 @@
             "./config/packages/messenger.yaml"
         ]
     },
+<<<<<<< HEAD
+=======
+    "symfony/webpack-encore-bundle": {
+        "version": "1.14",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.10",
+            "ref": "91f4d29f5ebbd2fcccc71ca55a17d14a17b308e8"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js",
+            "assets/styles/app.css",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
+        ]
+    },
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
     "twig/extra-bundle": {
         "version": "v3.4.0"
     }

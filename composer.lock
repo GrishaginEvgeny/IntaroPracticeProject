@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "61fb1105921718ce00d30784300d4575",
     "packages": [
         {
@@ -56,6 +57,11 @@
             "time": "2022-04-01T08:01:29+00:00"
         },
         {
+=======
+    "content-hash": "7a35960c0798ab3262d933e226a6a914",
+    "packages": [
+        {
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "doctrine/annotations",
             "version": "1.13.2",
             "source": {
@@ -1641,6 +1647,7 @@
             "time": "2022-06-06T11:26:02+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "liip/metadata-parser",
             "version": "0.5.0",
             "source": {
@@ -1760,6 +1767,8 @@
             "time": "2022-02-15T09:20:08+00:00"
         },
         {
+=======
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "monolog/monolog",
             "version": "2.7.0",
             "source": {
@@ -1864,6 +1873,7 @@
             "time": "2022-06-09T08:59:12+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "neur0toxine/psr.http-client-implementation.php-http-curl",
             "version": "1.1",
             "source": {
@@ -1910,10 +1920,40 @@
                 "shasum": ""
             },
             "type": "metapackage",
+=======
+            "name": "phpdocumentor/reflection-common",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+                "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/1d01c49d4ed62f25aa84a747ad35d5a16924662b",
+                "reference": "1d01c49d4ed62f25aa84a747ad35d5a16924662b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": "src/"
+                }
+            },
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
+<<<<<<< HEAD
             "description": "Satisfy \"psr/http-factory-implementation\" with packages provided by user, or fallback to \"nyholm\".",
             "keywords": [
                 "composer",
@@ -1988,16 +2028,71 @@
                 "php-http/psr7-integration-tests": "^1.0",
                 "phpunit/phpunit": "^7.5 || 8.5 || 9.4",
                 "symfony/error-handler": "^4.4"
+=======
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionCommon/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionCommon/tree/2.x"
+            },
+            "time": "2020-06-27T09:03:43+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "5.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/622548b623e81ca6d78b721c5e029f4ce664f170",
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170",
+                "shasum": ""
+            },
+            "require": {
+                "ext-filter": "*",
+                "php": "^7.2 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.2",
+                "phpdocumentor/type-resolver": "^1.3",
+                "webmozart/assert": "^1.9.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.3.2",
+                "psalm/phar": "^4.8"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.4-dev"
+=======
+                    "dev-master": "5.x-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 }
             },
             "autoload": {
                 "psr-4": {
+<<<<<<< HEAD
                     "Nyholm\\Psr7\\": "src/"
+=======
+                    "phpDocumentor\\Reflection\\": "src"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2006,6 +2101,7 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com"
                 },
@@ -2064,16 +2160,62 @@
             },
             "suggest": {
                 "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories"
+=======
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                },
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "account@ijaap.nl"
+                }
+            ],
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
+            },
+            "time": "2021-10-19T17:43:47+00:00"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "77a32518733312af16a44300404e945338981de3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/77a32518733312af16a44300404e945338981de3",
+                "reference": "77a32518733312af16a44300404e945338981de3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.0"
+            },
+            "require-dev": {
+                "ext-tokenizer": "*",
+                "psalm/phar": "^4.8"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.9-dev"
+=======
+                    "dev-1.x": "1.x-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 }
             },
             "autoload": {
                 "psr-4": {
+<<<<<<< HEAD
                     "Http\\Discovery\\": "src/"
+=======
+                    "phpDocumentor\\Reflection\\": "src"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2082,6 +2224,7 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
                     "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com"
                 }
@@ -2468,6 +2611,51 @@
                     "PHPStan\\PhpDocParser\\": [
                         "src/"
                     ]
+=======
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.1"
+            },
+            "time": "2022-03-15T21:29:03+00:00"
+        },
+        {
+            "name": "phpstan/phpdoc-parser",
+            "version": "1.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "135607f9ccc297d6923d49c2bcf309f509413215"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/135607f9ccc297d6923d49c2bcf309f509413215",
+                "reference": "135607f9ccc297d6923d49c2bcf309f509413215",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.5",
+                "phpstan/phpstan-phpunit": "^1.1",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "symfony/process": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2482,6 +2670,7 @@
             "time": "2022-06-26T13:09:08+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "pnz/json-exception",
             "version": "v1.0.1",
             "source": {
@@ -2528,6 +2717,8 @@
             "time": "2021-08-18T13:32:12+00:00"
         },
         {
+=======
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "psr/cache",
             "version": "3.0.0",
             "source": {
@@ -2680,6 +2871,7 @@
             "time": "2019-01-08T18:20:26+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "psr/http-client",
             "version": "1.0.1",
             "source": {
@@ -2840,6 +3032,8 @@
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
+=======
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "psr/link",
             "version": "2.0.1",
             "source": {
@@ -2905,6 +3099,7 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
                 "shasum": ""
@@ -3024,6 +3219,24 @@
             "autoload": {
                 "psr-4": {
                     "RetailCrm\\Api\\": "src/"
+=======
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "src"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3032,6 +3245,7 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
                     "name": "RetailCRM",
                     "email": "support@retailcrm.pro"
                 }
@@ -3049,6 +3263,23 @@
                 "source": "https://github.com/retailcrm/api-client-php/tree/v6.8.4"
             },
             "time": "2022-06-21T10:29:39+00:00"
+=======
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/3.0.0"
+            },
+            "time": "2021-07-14T16:46:02+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -3295,6 +3526,7 @@
         },
         {
             "name": "symfony/cache-contracts",
+<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -3309,6 +3541,22 @@
             },
             "require": {
                 "php": ">=8.0.2",
+=======
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/cache-contracts.git",
+                "reference": "2eab7fa459af6d75c6463e63e633b667a9b761d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache-contracts/zipball/2eab7fa459af6d75c6463e63e633b667a9b761d3",
+                "reference": "2eab7fa459af6d75c6463e63e633b667a9b761d3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 "psr/cache": "^3.0"
             },
             "suggest": {
@@ -3317,7 +3565,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "3.1-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -3354,7 +3606,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/cache-contracts/tree/v3.0.2"
+=======
+                "source": "https://github.com/symfony/cache-contracts/tree/v3.1.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "funding": [
                 {
@@ -3370,7 +3626,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-01-02T09:55:41+00:00"
+=======
+            "time": "2022-02-25T11:15:52+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "symfony/config",
@@ -3635,6 +3895,7 @@
         },
         {
             "name": "symfony/deprecation-contracts",
+<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -3649,11 +3910,31 @@
             },
             "require": {
                 "php": ">=8.0.2"
+=======
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/deprecation-contracts.git",
+                "reference": "07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918",
+                "reference": "07f1b9cc2ffee6aaafcf4b710fbc38ff736bd918",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "3.1-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -3682,7 +3963,11 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/deprecation-contracts/tree/v3.0.2"
+=======
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.1.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "funding": [
                 {
@@ -3698,7 +3983,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-01-02T09:55:41+00:00"
+=======
+            "time": "2022-02-25T11:15:52+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -4113,6 +4402,7 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
+<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -4127,6 +4417,22 @@
             },
             "require": {
                 "php": ">=8.0.2",
+=======
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher-contracts.git",
+                "reference": "02ff5eea2f453731cfbc6bc215e456b781480448"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/02ff5eea2f453731cfbc6bc215e456b781480448",
+                "reference": "02ff5eea2f453731cfbc6bc215e456b781480448",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 "psr/event-dispatcher": "^1"
             },
             "suggest": {
@@ -4135,7 +4441,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "3.1-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -4172,7 +4482,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.0.2"
+=======
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.1.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "funding": [
                 {
@@ -4188,7 +4502,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-01-02T09:55:41+00:00"
+=======
+            "time": "2022-02-25T11:15:52+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "symfony/expression-language",
@@ -4778,6 +5096,7 @@
         },
         {
             "name": "symfony/http-client-contracts",
+<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -4792,6 +5111,22 @@
             },
             "require": {
                 "php": ">=8.0.2"
+=======
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client-contracts.git",
+                "reference": "fd038f08c623ab5d22b26e9ba35afe8c79071800"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/fd038f08c623ab5d22b26e9ba35afe8c79071800",
+                "reference": "fd038f08c623ab5d22b26e9ba35afe8c79071800",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "suggest": {
                 "symfony/http-client-implementation": ""
@@ -4799,7 +5134,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "3.1-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -4809,7 +5148,14 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\HttpClient\\": ""
+<<<<<<< HEAD
                 }
+=======
+                },
+                "exclude-from-classmap": [
+                    "/Test/"
+                ]
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4836,7 +5182,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/http-client-contracts/tree/v3.0.2"
+=======
+                "source": "https://github.com/symfony/http-client-contracts/tree/v3.1.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "funding": [
                 {
@@ -4852,7 +5202,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-04-12T16:11:42+00:00"
+=======
+            "time": "2022-04-22T07:30:54+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "symfony/http-foundation",
@@ -7141,6 +7495,7 @@
         },
         {
             "name": "symfony/service-contracts",
+<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -7155,6 +7510,22 @@
             },
             "require": {
                 "php": ">=8.0.2",
+=======
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "925e713fe8fcacf6bc05e936edd8dd5441a21239"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/925e713fe8fcacf6bc05e936edd8dd5441a21239",
+                "reference": "925e713fe8fcacf6bc05e936edd8dd5441a21239",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 "psr/container": "^2.0"
             },
             "conflict": {
@@ -7166,7 +7537,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "3.1-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -7176,7 +7551,14 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Service\\": ""
+<<<<<<< HEAD
                 }
+=======
+                },
+                "exclude-from-classmap": [
+                    "/Test/"
+                ]
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7203,7 +7585,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/service-contracts/tree/v3.0.2"
+=======
+                "source": "https://github.com/symfony/service-contracts/tree/v3.1.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "funding": [
                 {
@@ -7219,7 +7605,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-05-30T19:17:58+00:00"
+=======
+            "time": "2022-05-30T19:18:58+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "symfony/stopwatch",
@@ -7465,6 +7855,7 @@
         },
         {
             "name": "symfony/translation-contracts",
+<<<<<<< HEAD
             "version": "v3.0.2",
             "source": {
                 "type": "git",
@@ -7479,6 +7870,22 @@
             },
             "require": {
                 "php": ">=8.0.2"
+=======
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/translation-contracts.git",
+                "reference": "606be0f48e05116baef052f7f3abdb345c8e02cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/606be0f48e05116baef052f7f3abdb345c8e02cc",
+                "reference": "606be0f48e05116baef052f7f3abdb345c8e02cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "suggest": {
                 "symfony/translation-implementation": ""
@@ -7486,7 +7893,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-main": "3.0-dev"
+=======
+                    "dev-main": "3.1-dev"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -7496,7 +7907,14 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Contracts\\Translation\\": ""
+<<<<<<< HEAD
                 }
+=======
+                },
+                "exclude-from-classmap": [
+                    "/Test/"
+                ]
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7523,7 +7941,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/translation-contracts/tree/v3.0.2"
+=======
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.1.1"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             },
             "funding": [
                 {
@@ -7539,7 +7961,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-06-27T17:10:44+00:00"
+=======
+            "time": "2022-06-27T17:24:16+00:00"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         {
             "name": "symfony/twig-bridge",
@@ -8103,6 +8529,80 @@
             "time": "2022-01-02T09:55:41+00:00"
         },
         {
+<<<<<<< HEAD
+=======
+            "name": "symfony/webpack-encore-bundle",
+            "version": "v1.14.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/webpack-encore-bundle.git",
+                "reference": "6b18be99bf2a5a402b80a2c00043fe0b365fe836"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/webpack-encore-bundle/zipball/6b18be99bf2a5a402b80a2c00043fe0b365fe836",
+                "reference": "6b18be99bf2a5a402b80a2c00043fe0b365fe836",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+                "symfony/asset": "^4.4 || ^5.0 || ^6.0",
+                "symfony/config": "^4.4 || ^5.0 || ^6.0",
+                "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^4.4 || ^5.0 || ^6.0",
+                "symfony/service-contracts": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0",
+                "symfony/phpunit-bridge": "^5.3 || ^6.0",
+                "symfony/twig-bundle": "^4.4 || ^5.0 || ^6.0",
+                "symfony/web-link": "^4.4 || ^5.0 || ^6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/webpack-encore",
+                    "url": "https://github.com/symfony/webpack-encore"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\WebpackEncoreBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Integration with your Symfony app & Webpack Encore!",
+            "support": {
+                "issues": "https://github.com/symfony/webpack-encore-bundle/issues",
+                "source": "https://github.com/symfony/webpack-encore-bundle/tree/v1.14.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-03T17:55:32+00:00"
+        },
+        {
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "symfony/yaml",
             "version": "v6.0.10",
             "source": {
@@ -8177,6 +8677,7 @@
             "time": "2022-06-20T11:58:32+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "totten/lurkerlite",
             "version": "1.3.0",
             "source": {
@@ -8240,6 +8741,8 @@
             "time": "2020-09-01T10:01:01+00:00"
         },
         {
+=======
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "twig/extra-bundle",
             "version": "v3.4.0",
             "source": {
@@ -8455,6 +8958,174 @@
     ],
     "packages-dev": [
         {
+<<<<<<< HEAD
+=======
+            "name": "doctrine/data-fixtures",
+            "version": "1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/data-fixtures.git",
+                "reference": "ba37bfb776de763c5bf04a36d074cd5f5a083c42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/ba37bfb776de763c5bf04a36d074cd5f5a083c42",
+                "reference": "ba37bfb776de763c5bf04a36d074cd5f5a083c42",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.13|^3.0",
+                "doctrine/persistence": "^1.3.3|^2.0|^3.0",
+                "php": "^7.2 || ^8.0"
+            },
+            "conflict": {
+                "doctrine/dbal": "<2.13",
+                "doctrine/phpcr-odm": "<1.3.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9.0",
+                "doctrine/dbal": "^2.13 || ^3.0",
+                "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
+                "doctrine/orm": "^2.7.0",
+                "ext-sqlite3": "*",
+                "jangregor/phpstan-prophecy": "^1",
+                "phpstan/phpstan": "^1.5",
+                "phpunit/phpunit": "^8.5 || ^9.5",
+                "symfony/cache": "^5.0 || ^6.0",
+                "vimeo/psalm": "^4.10"
+            },
+            "suggest": {
+                "alcaeus/mongo-php-adapter": "For using MongoDB ODM 1.3 with PHP 7 (deprecated)",
+                "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
+                "doctrine/orm": "For loading ORM fixtures",
+                "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\DataFixtures\\": "lib/Doctrine/Common/DataFixtures"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Data Fixtures for all Doctrine Object Managers",
+            "homepage": "https://www.doctrine-project.org",
+            "keywords": [
+                "database"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/data-fixtures/issues",
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.5.3"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdata-fixtures",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-04-19T10:01:44+00:00"
+        },
+        {
+            "name": "doctrine/doctrine-fixtures-bundle",
+            "version": "3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
+                "reference": "601988c5b46dbd20a0f886f967210aba378a6fd5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/601988c5b46dbd20a0f886f967210aba378a6fd5",
+                "reference": "601988c5b46dbd20a0f886f967210aba378a6fd5",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/data-fixtures": "^1.3",
+                "doctrine/doctrine-bundle": "^1.11|^2.0",
+                "doctrine/orm": "^2.6.0",
+                "doctrine/persistence": "^1.3.7|^2.0|^3.0",
+                "php": "^7.1 || ^8.0",
+                "symfony/config": "^3.4|^4.3|^5.0|^6.0",
+                "symfony/console": "^3.4|^4.3|^5.0|^6.0",
+                "symfony/dependency-injection": "^3.4.47|^4.3|^5.0|^6.0",
+                "symfony/doctrine-bridge": "^3.4|^4.1|^5.0|^6.0",
+                "symfony/http-kernel": "^3.4|^4.3|^5.0|^6.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9",
+                "phpstan/phpstan": "^1.4.10",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.26 || ^9.5.20",
+                "symfony/phpunit-bridge": "^6.0.8",
+                "vimeo/psalm": "^4.22"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\FixturesBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Doctrine Project",
+                    "homepage": "https://www.doctrine-project.org"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DoctrineFixturesBundle",
+            "homepage": "https://www.doctrine-project.org",
+            "keywords": [
+                "Fixture",
+                "persistence"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/DoctrineFixturesBundle/issues",
+                "source": "https://github.com/doctrine/DoctrineFixturesBundle/tree/3.4.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdoctrine-fixtures-bundle",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-04-28T17:58:29+00:00"
+        },
+        {
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
             "name": "myclabs/deep-copy",
             "version": "1.11.0",
             "source": {
@@ -10730,7 +11401,13 @@
     "platform": {
         "php": ">=8.0.2",
         "ext-ctype": "*",
+<<<<<<< HEAD
         "ext-iconv": "*"
+=======
+        "ext-iconv": "*",
+        "ext-intl": "*",
+        "ext-simplexml": "*"
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

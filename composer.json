@@ -7,13 +7,21 @@
         "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+<<<<<<< HEAD
+=======
+        "ext-intl": "*",
+        "ext-simplexml": "*",
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.6",
+<<<<<<< HEAD
         "retailcrm/api-client-php": "~6.0",
+=======
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "6.0.*",
         "symfony/console": "6.0.*",
@@ -41,6 +49,10 @@
         "symfony/twig-bundle": "6.0.*",
         "symfony/validator": "6.0.*",
         "symfony/web-link": "6.0.*",
+<<<<<<< HEAD
+=======
+        "symfony/webpack-encore-bundle": "^1.14",
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         "symfony/yaml": "6.0.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -49,8 +61,12 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
+<<<<<<< HEAD
             "symfony/runtime": true,
             "civicrm/composer-compile-plugin": true
+=======
+            "symfony/runtime": true
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -95,10 +111,17 @@
         "symfony": {
             "allow-contrib": false,
             "require": "6.0.*"
+<<<<<<< HEAD
         },
         "compile-whitelist": ["retailcrm/api-client-php"]
     },
     "require-dev": {
+=======
+        }
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+>>>>>>> ddb025850ecd5660f84658902f40b1b9693473d1
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.0.*",
         "symfony/css-selector": "6.0.*",
