@@ -15,5 +15,9 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress",
         "prettier": "prettier"
+    },
+    "dependencies": {
+        "@fontsource/montserrat-alternates": "^4.5.9",
+        "bootstrap": "^5.1.3"
     }
 }

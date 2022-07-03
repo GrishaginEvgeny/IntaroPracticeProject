@@ -1,3 +1,138 @@
-body {
-    background-color: lightgray;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat Alternates', sans-serif;
+    color: black;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.img-container {
+    width: 100%;
+    height: 1100px;
+    z-index: -1;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.img-fluid {
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+}
+.img-fluid:before {
+    display: block;
+    background-color: rgb(0, 0, 0);
+    content: '';
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+.img-fluid:after {
+    color: white;
+    content: attr(alt);
+    display: block;
+    font-size: 25px;
+    opacity: 0;
+    padding: 0 3%;
+    position: absolute;
+    text-transform: none;
+    top: 50%;
+    -webkit-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform: scale(0) translateY(-50%);
+    transform: scale(0) translateY(-50%);
+    width: 100%;
+    z-index: 3;
+}
+
+.img-fluid img {
+    border: none;
+    display: block;
+    width: 100%;
+}
+
+.img-fluid:after {
+    -webkit-transition: all 600ms ease-in-out;
+    transition: all 1000ms ease-in-out;
+}
+
+.img-fluid:hover:before {
+    opacity: 0.6;
+}
+
+.img-fluid:hover:after {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(-50%);
+    transform: scale(1) translateY(-50%);
+}
+
+.collection-img {
+    position: relative;
+    z-index: 910;
+    display: block;
+    padding-top: 135%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+.wrapper {
+    letter-spacing: -0.36em;
+}
+.wrapper > div {
+    display: inline-table;
+    width: 25%;
+    letter-spacing: normal;
+    margin-bottom: 50px;
+}
+
+.photo {
+    position: relative;
+}
+.phototext {
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    background: #00000094;
+    padding: 10px;
+    text-align: center;
+    z-index: 911;
+}
+
+.phototext.name {
+    top: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 260px;
+    display: block;
+}
+
+
+.phototext.price {
+    top: calc(70% + 50px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
+    display: block;
 }
