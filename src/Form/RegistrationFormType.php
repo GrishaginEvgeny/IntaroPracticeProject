@@ -100,8 +100,8 @@ class RegistrationFormType extends AbstractType
                 "mapped" => false,
                 'label' => 'Пол',
                 'choices' => [
-                    'Женский' => 'Женский',
-                    'Мужской' => 'Мужской',
+                    'Женский' => 'Жен.',
+                    'Мужской' => 'Муж.',
                 ],
             'expanded' => true
             ])

@@ -65,8 +65,6 @@ class RegistrationController extends AbstractController
             $request->customer->phones = [new CustomerPhone()];
             $request->customer->phones[0]->number = $form->get('phone')->getData();
             $request->customer->birthday = $form->get('birthdate')->getData();
-            $request->customer->sex = $form->get('sex')->getData();
-
 
             try {
                 $response = $client->customers->create($request);

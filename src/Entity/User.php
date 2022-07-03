@@ -14,7 +14,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string')]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class:'UserIdGenerator')]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
