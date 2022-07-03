@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220703131424 extends AbstractMigration
+final class Version20220703181548 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,11 +20,6 @@ final class Version20220703131424 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SEQUENCE offer_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE product_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE property_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE property_value_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE section_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE offer (id INT NOT NULL, product_id INT NOT NULL, name VARCHAR(255) NOT NULL, xml_id VARCHAR(255) DEFAULT NULL, price DOUBLE PRECISION NOT NULL, quantity INT NOT NULL, unit VARCHAR(255) NOT NULL, active BOOLEAN NOT NULL, picture VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_29D6873E4584665A ON offer (product_id)');
@@ -70,11 +65,6 @@ final class Version20220703131424 extends AbstractMigration
         $this->addSql('ALTER TABLE property_value DROP CONSTRAINT FK_DB649939549213EC');
         $this->addSql('ALTER TABLE product_section DROP CONSTRAINT FK_FCAA615FD823E37A');
         $this->addSql('ALTER TABLE section DROP CONSTRAINT FK_2D737AEF727ACA70');
-        $this->addSql('DROP SEQUENCE offer_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE product_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE property_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE property_value_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE section_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE user_id_seq CASCADE');
         $this->addSql('DROP TABLE offer');
         $this->addSql('DROP TABLE product');
