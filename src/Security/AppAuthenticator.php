@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use RetailCrm\Api\Factory\SimpleClientFactory;
@@ -32,6 +33,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     public const LOGIN_ROUTE = 'app_login';
 
     private $apiKey;
+
    
     private ManagerRegistry $doctrine;
     private UserRepository $userRepository;
@@ -40,10 +42,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function __construct(ManagerRegistry $doctrine, UserRepository $userRepository, UrlGeneratorInterface $urlGenerator, $crmConfigPath='../config/apiKey.ini')
     {
-        if (!($crmConfig= parse_ini_file($crmConfigPath))) {
-            throw new FileNotFoundException($crmConfigPath);
-        }
-        $this->apiKey =$crmConfig['apiKey'];
+        $this->apiKey = $_ENV['RETAIL_CRM_API_KEY'];
         $this->urlGenerator = $urlGenerator;
         $this->doctrine = $doctrine;
         $this->userRepository = $userRepository;
