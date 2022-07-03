@@ -11,15 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
-    #[Route('/test', name: 'app_test')]
-    public function index(ManagerRegistry $doctrine): Response
-    {
+    #[Route("/test", name: "app_test")]
+    public function index(ManagerRegistry $doctrine): Response {
         $firstLevelSections = $doctrine
             ->getRepository(Section::class)
-            ->findBy(['parent' => null]);
+            ->findBy(["parent" => null]);
 
-        return $this->render('test/index.html.twig', [
-            'firstLevelCatalogSections' => $firstLevelSections,
+        return $this->render("test/index.html.twig", [
+            "firstLevelSections" => $firstLevelSections,
         ]);
     }
 }

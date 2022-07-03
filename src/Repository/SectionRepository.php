@@ -19,22 +19,4 @@ class SectionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Section::class);
     }
-
-    /**
-     * @return array
-     * Разделы первого уровня
-     */
-    public function firstLevelCatalogSections(): array
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-          'SELECT s.id AS id, 
-                   s.name AS name 
-               FROM App\Entity\Section s
-               WHERE s.parent IS NULL'
-        );
-
-        return $query->getResult();
-    }
 }

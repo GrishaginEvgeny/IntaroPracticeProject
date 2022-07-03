@@ -61,8 +61,6 @@ class Section
         return $this;
     }
 
-
-
     /**
      * @return Collection|Product[]
      */
