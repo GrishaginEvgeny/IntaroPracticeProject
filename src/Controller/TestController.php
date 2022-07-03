@@ -11,18 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
-    /**
-     * @throws Exception
-     */
     #[Route('/test', name: 'app_test')]
     public function index(ManagerRegistry $doctrine): Response
     {
-        $firstLevelCatalogSections = $doctrine
+        $firstLevelSections = $doctrine
             ->getRepository(Section::class)
-            ->productsSection(307);
+            ->findBy(['parent' => null]);
 
         return $this->render('test/index.html.twig', [
-            'firstLevelCatalogSections' => $firstLevelCatalogSections,
+            'firstLevelCatalogSections' => $firstLevelSections,
         ]);
     }
 }
