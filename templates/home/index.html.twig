@@ -17,7 +17,7 @@
                     <a href="#" class="text-decoration-none text-dark text-uppercase">доставка</a>
                 </li>
                 <li class="col">
-                    <a href="#" class="text-decoration-none text-dark text-uppercase>о магазине</a>
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">о магазине</a>
                 </li>
                 <li class=" col">
                     <a href="#" class="text-decoration-none text-dark text-uppercase">гарантия</a>
@@ -94,7 +94,7 @@
             <div class="wrapper">
                 {% for item in section.products %}
                     <div class="photo">
-                        <a href="#">
+                        <a href="product/{{ item.id }}">
                              <div
                                         class="collection-img"
                                         style="background-image: url('upload/pictures/{{ item.picture }}');"

@@ -32,7 +32,7 @@ class SectionRepository extends ServiceEntityRepository
         $connect = $this->getEntityManager()->getConnection();
         $stmt = $connect->prepare($sql);
         $resultSet = $stmt->executeQuery()->fetchAllAssociative();
-        for($i = 0; $i < count($resultSet); $i++) {
+        for ($i = 0; $i < count($resultSet); $i++) {
             $resultSet[$i]['children'] = $this->getChildSections($resultSet[$i]['id']);
         }
         return $resultSet;
