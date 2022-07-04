@@ -22,7 +22,7 @@
         <div class="wrapper">
             {% for item in products %}
             <div class="photo collection-wrapper bg-image hover-zoom">
-                <a href="#" class="bg-image hover-zoom">
+                <a href="{{ path('app_product', {'id': item.id}) }}" class="bg-image hover-zoom">
                     <img
                             class="collection-img"
                             src="{{ asset('upload/pictures/' ~ item.picture) }}"
