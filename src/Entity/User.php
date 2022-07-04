@@ -25,6 +25,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
+
+
     private $email;
 
     private $roles = [];
@@ -32,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180)
      */
+     
     private $password;
 
     public function getId(): ?int
