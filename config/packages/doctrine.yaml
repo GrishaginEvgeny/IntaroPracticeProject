@@ -25,6 +25,7 @@ when@test:
 when@prod:
     doctrine:
         orm:
+            default_entity_manager: default
             auto_generate_proxy_classes: false
             query_cache_driver:
                 type: pool

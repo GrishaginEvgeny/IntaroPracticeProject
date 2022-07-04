@@ -4,6 +4,7 @@
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
+/config/apiKey.ini
 /public/bundles/
 /var/
 /vendor/
@@ -19,6 +20,7 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+/tools/
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/

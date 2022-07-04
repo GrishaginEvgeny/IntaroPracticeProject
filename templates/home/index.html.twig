@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Khalif{% endblock %}
+
+{% block body %}
+    <header>
+        <div class="container-fluid">
+            <p class="fs-1 text-center pt-3 pb-3 fw-bold">Khalif</p>
+            <ul class="row align-items-center mx-auto text-center fs-5">
+                <li class="col">
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">главная</a>
+                </li>
+                <li class="col">
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">как купить</a>
+                </li>
+                <li class="col">
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">доставка</a>
+                </li>
+                <li class="col">
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">о магазине</a>
+                </li>
+                <li class=" col">
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">гарантия</a>
+                </li>
+                <li class="col">
+                    <a href="#" class="text-decoration-none text-dark text-uppercase">контакты</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <ul
+                class="row align-items-center mx-auto text-center bg-dark fs-4"
+                style="height: 80px"
+        >
+            {% for section in header %}
+                <li class="col">
+                    {% if section.children %}
+                        <div class="dropdown">
+                            <button
+                                    class="btn text-white btn-lg dropdown-toggle"
+                                    type="button"
+                                    id="{{ section.id }}"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                {{ section.name }}
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="{{ section.id }}">
+                                <li><a class="dropdown-item" href="section/{{ section.id }}">{{ section.name }}</a></li>
+                                {% for child in section.children %}
+                                    <li><a class="dropdown-item" href="section/{{ child.id }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <button
+                                class="btn text-white btn-lg"
+                                type="button"
+                                id="{{ section.id }}"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            {{ section.name }}
+                        </button>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <a
+                class="img-fluid"
+                href="#"
+                style="height: 1050px"
+                alt="&#34;ANTIHYPE HOME&#34; COLLECTION"
+        ><img
+                    src="https://thumb.tildacdn.com/tild3464-3565-4135-b430-323565616130/-/format/webp/1H1A534545560-Edit_1.png"
+                    alt=""
+            /></a>
+
+        <a
+                class="img-fluid"
+                href="#"
+                style="height: 661px"
+                alt="	&#34;LIDA&#34; COLLECTION"
+        ><img src="https://ie.wampi.ru/2022/07/01/_1_1-1.png" alt=""
+            /></a>
+    </div>
+    <div class="container">
+        {% for section in body %}
+            <p class="fs-3 text-center pt-3 pb-3">{{ section.name }}</p>
+            <div class="wrapper">
+                {% for item in section.products %}
+                    <div class="photo">
+                        <a href="product/{{ item.id }}">
+                             <div
+                                        class="collection-img"
+                                        style="background-image: url('upload/pictures/{{ item.picture }}');"
+                                        alt=""></div>
+
+                            <div class="phototext name" data-toggle="tooltip"
+                                 title="{{ item.name }}">{{ item.name }}</div>
+                            <div class="phototext price" data-toggle="tooltip"
+                                 title="{{ item.price ~ ' руб.' }}">{{ item.price ~ ' руб.' }}</div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <footer>
+        <div class="container-fluid bg-dark text-center" style="height: 250px">
+            <div class="row">
+                <div class="col-sm text-white fs-1 pt-3 fw-bold">Khalif</div>
+                <div class="col-sm text-muted fs-6 pt-4">МАГАЗИН</div>
+                <div class="col-sm text-muted fs-6 pt-4">ИНФОРМАЦИЯ</div>
+                <div class="col-sm text-white fs-6 pt-4">Сделано студентами ЛГТУ</div>
+            </div>
+            <div class="row">
+                <div class="col-sm text-white fs-1"></div>
+                <a href="#" class="text-decoration-none col-sm text-white fs-6 mb-1"
+                >ГЛАВНАЯ</a
+                >
+                <a href="#" class="text-decoration-none col-sm text-white fs-6 mb-1"
+                >О МАГАЗИНЕ</a
+                >
+                <a href="#" class="text-decoration-none col-sm text-white fs-6 mb-1"
+                >antihype@lstu.com</a
+                >
+            </div>
+            <div class="row">
+                <div class="col-sm text-white fs-1"></div>
+                <a href="#" class="text-decoration-none col-sm text-white fs-6 mb-1"
+                >КАК КУПИТЬ</a
+                >
+                <a href="#" class="text-decoration-none col-sm text-white fs-6 mb-1"
+                >КОНТАКТЫ</a
+                >
+                <div class="col-sm text-white fs-6 mb-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm text-white fs-1 mb-1"></div>
+                <a href="#" class="text-decoration-none col-sm text-white fs-6 mb-1"
+                >ДОСТАВКА</a
+                >
+                <div class="col-sm text-white fs-6 mb-1"></div>
+                <div class="col-sm text-white fs-6 mb-1"></div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
