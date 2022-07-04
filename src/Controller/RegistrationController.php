@@ -47,10 +47,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
 
-            if (!($crmConfig= parse_ini_file("../config/apiKey.ini"))) {
-                throw new FileNotFoundException("../config/apiKey.ini");
-            }
-            $this->apiKey =$crmConfig['apiKey'];
+            $this->apiKey = $_ENV['RETAIL_CRM_API_KEY'];
 
             $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
             $request = new CustomersCreateRequest();
