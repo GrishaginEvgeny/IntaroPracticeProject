@@ -70,6 +70,35 @@ class SectionRepository extends ServiceEntityRepository
     /**
      * @throws Exception
      */
+    public function getParentSections(int $id): array
+    {
+        $sql = 'WITH RECURSIVE parents AS (
+                    SELECT id,
+                           parent_id,
+                           name
+                    FROM section
+                    WHERE id = :id
+                
+                    UNION ALL
+                
+                    SELECT s.id,
+                           s.parent_id,
+                           s.name
+                    FROM section s
+                             JOIN parents p
+                                  ON s.id = p.parent_id
+                )
+                SELECT * FROM parents';
+
+        $connect = $this->getEntityManager()->getConnection();
+        $stmt = $connect->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id' => $id]);
+        return array_reverse($resultSet->fetchAllAssociative());
+    }
+
+    /**
+     * @throws Exception
+     */
     public function getSectionOffers(int $id): array
     {
         $sql = 'WITH RECURSIVE childs AS (

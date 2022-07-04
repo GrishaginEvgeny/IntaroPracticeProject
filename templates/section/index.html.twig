@@ -3,18 +3,84 @@
 {% block title %}Hello SectionController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/evgen1067/PROJECTS/BlockOne/src/Controller/SectionController.php'|file_link(0) }}">src/Controller/SectionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/evgen1067/PROJECTS/BlockOne/templates/section/index.html.twig'|file_link(0) }}">templates/section/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% include 'base/header.html.twig' with {header} %}
+    <div class="container">
+        <p class="fs-4 text-left pt-0 pb-0 text-uppercase">
+            КОЛЛЕКЦИЯ
+        </p>
+        <p class="fs-6 text-left pt-0 pb-0">
+            <a href="#" class="text-decoration-none text-dark text-uppercase">
+                ГЛАВНАЯ
+            </a>
+            {% for item in parentSections %}
+                /
+                <a href="{{ path('app_section', {'id': item.id }) }}" class="text-decoration-none text-dark text-uppercase">
+                    {{ item.name }}
+                </a>
+            {% endfor %}
+        </p>
+        <div class="wrapper">
+            <div class="photo collection-wrapper bg-image hover-zoom">
+                <a href="#" class="bg-image hover-zoom">
+                    <img
+                            class="collection-img"
+                            src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013542069.jpg"
+                            alt=""
+                    />
+                    <div class="phototext">Текст сверху картинки</div>
+                </a>
+            </div>
+            <div class="photo collection-wrapper">
+                <a href="#">
+                    <img
+                            class="collection-img"
+                            src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013542069.jpg"
+                            alt=""
+                    />
+                    <div class="phototext">Текст сверху картинки</div>
+                </a>
+            </div>
+            <div class="photo collection-wrapper">
+                <a href="#">
+                    <img
+                            class="collection-img"
+                            src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013542069.jpg"
+                            alt=""
+                    />
+                    <div class="phototext">Текст сверху картинки</div>
+                </a>
+            </div>
+            <div class="photo collection-wrapper bg-image hover-zoom">
+                <a href="#" class="bg-image hover-zoom">
+                    <img
+                            class="collection-img"
+                            src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013542069.jpg"
+                            alt=""
+                    />
+                    <div class="phototext">Текст сверху картинки</div>
+                </a>
+            </div>
+            <div class="photo collection-wrapper">
+                <a href="#">
+                    <img
+                            class="collection-img"
+                            src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013542069.jpg"
+                            alt=""
+                    />
+                    <div class="phototext">Текст сверху картинки</div>
+                </a>
+            </div>
+            <div class="photo collection-wrapper">
+                <a href="#">
+                    <img
+                            class="collection-img"
+                            src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013542069.jpg"
+                            alt=""
+                    />
+                    <div class="phototext">Текст сверху картинки</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% include 'base/footer.html.twig' %}
 {% endblock %}
