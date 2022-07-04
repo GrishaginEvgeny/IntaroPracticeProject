@@ -21,11 +21,11 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
-    const DEMO_DATA_URL = "http://b12.skillum.ru/bitrix/catalog_export/intarocrm.xml";
+    public const DEMO_DATA_URL = "http://b12.skillum.ru/bitrix/catalog_export/intarocrm.xml";
 
-    const UPLOAD_DIR = __DIR__ . "/../../public/upload/pictures";
+    public const UPLOAD_DIR = __DIR__ . "/../../public/upload/pictures";
 
-    const OFFERS_COUNT = 500;
+    public const OFFERS_COUNT = 500;
 
     public function load(ObjectManager $manager)
     {

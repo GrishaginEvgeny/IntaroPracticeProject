@@ -34,7 +34,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     private $apiKey;
 
-   
+
     private ManagerRegistry $doctrine;
     private UserRepository $userRepository;
 
@@ -48,7 +48,8 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $this->userRepository = $userRepository;
     }
 
-    public function getCrmUser($client, $email){
+    public function getCrmUser($client, $email)
+    {
         $usersRequest = new UsersRequest();
         $usersRequest->filter = new ApiUserFilter();
         $usersRequest->filter->email = $email;
@@ -65,7 +66,8 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         return true;
     }
 
-    public function getCrmCustomer($client, $email){
+    public function getCrmCustomer($client, $email)
+    {
         $customersRequest = new CustomersRequest();
         $customersRequest->filter = new CustomerFilter();
         $customersRequest->filter->email = $email;
@@ -79,7 +81,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             echo 'Customer is not found.';
             return false;
         }
-        return true;        
+        return true;
     }
 
     public function authenticate(Request $request): Passport
@@ -91,8 +93,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         if ($user) {
             if (self::getCrmUser($client, $email)) {
                 $user->setRoles(['ROLE_ADMIN']);
-            }            
-            elseif (self::getCrmCustomer($client, $email)) {
+            } elseif (self::getCrmCustomer($client, $email)) {
                 $user->setRoles(['ROLE_USER']);
             }
         }
@@ -113,7 +114,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $email = $request->request->get('email', '');
         $user=$this->userRepository->findOneByEmail($email);
 
-        if($user->getRoles()==['ROLE_ADMIN']) {
+        if ($user->getRoles()==['ROLE_ADMIN']) {
             return new RedirectResponse($this->urlGenerator->generate('app_admin')); //как сгенерируем админ панель поменяю роут
         }
         return new RedirectResponse($this->urlGenerator->generate('app_index'));
