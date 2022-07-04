@@ -32,9 +32,14 @@ class SectionController extends AbstractController
             ->getRepository(Section::class)
             ->getHeaderSections();
 
+        $products = $doctrine
+            ->getRepository(Section::class)
+            ->getSectionOffers($section->getId());
+
         return $this->render('section/index.html.twig', [
             'header' => $header,
             'parentSections' => $parentSections,
+            'products' => $products,
         ]);
     }
 }
