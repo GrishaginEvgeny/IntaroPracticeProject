@@ -24,3 +24,4 @@ services:
     # please note that last definitions always *replace* previous ones
     RetailCrm\Api\Factory\SimpleClientFactory:
         autowire: true
+

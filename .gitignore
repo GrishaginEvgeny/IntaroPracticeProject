@@ -21,7 +21,6 @@
 ###< symfony/phpunit-bridge ###
 
 /tools/
-
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
