@@ -22,6 +22,7 @@ class SectionRepository extends ServiceEntityRepository
 
     /**
      * @throws Exception
+     * получить секции для header-a
      */
     public function getHeaderSections(): array
     {
@@ -40,6 +41,7 @@ class SectionRepository extends ServiceEntityRepository
 
     /**
      * @throws Exception
+     * получить дочерние секции
      */
     public function getChildSections(int $id): array
     {
@@ -69,6 +71,7 @@ class SectionRepository extends ServiceEntityRepository
 
     /**
      * @throws Exception
+     * получить родительские секции
      */
     public function getParentSections(int $id): array
     {
@@ -98,6 +101,7 @@ class SectionRepository extends ServiceEntityRepository
 
     /**
      * @throws Exception
+     * получить товары секции по id
      */
     public function getSectionOffers(int $id): array
     {
@@ -128,5 +132,26 @@ class SectionRepository extends ServiceEntityRepository
         $stmt = $connect->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
         return $stmt->executeQuery()->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     * получить секции продукта
+     */
+    public function getSectionsByProduct(int $id): array
+    {
+        $sql = 'SELECT 
+                    s.id 
+                FROM section s, 
+                     product p, 
+                     product_section ps 
+                WHERE p.id = :id
+                  AND p.id = ps.product_id 
+                  AND s.id = ps.section_id';
+
+        $connect = $this->getEntityManager()->getConnection();
+        $stmt = $connect->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id' => $id])->fetchAssociative();
+        return $this->getParentSections($resultSet['id']);
     }
 }

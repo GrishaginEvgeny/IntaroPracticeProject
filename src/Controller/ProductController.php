@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
 use App\Entity\Product;
 use App\Entity\Section;
 use Doctrine\DBAL\Exception;
@@ -28,8 +29,40 @@ class ProductController extends AbstractController
             ->getRepository(Section::class)
             ->getHeaderSections();
 
+        $sections = $doctrine
+            ->getRepository(Section::class)
+            ->getSectionsByProduct($product->getId());
+
+        $resultSet = $doctrine
+            ->getRepository(Offer::class)
+            ->getOfferInfo($id);
+        $offerInfo = [];
+        for ($i = 0; $i < count($resultSet);) {
+            $settings = [];
+            for ($j = $i; $j < count($resultSet); $j++) {
+                if ($resultSet[$i]['o_id'] == $resultSet[$j]['o_id']) {
+                    $settings[] = [
+                        'name' => $resultSet[$j]['name'],
+                        'code' => $resultSet[$j]['code'],
+                        'sort' => $resultSet[$j]['sort'],
+                        'value' => $resultSet[$j]['value'],
+                    ];
+                }
+            }
+            $offerInfo[$resultSet[$i]['o_id']] = [
+                'o_id' => $resultSet[$i]['o_id'],
+                'price' => $resultSet[$i]['price'],
+                'picture' => $resultSet[$i]['picture'],
+                'settings' => $settings,
+            ];
+            $i += count($settings);
+        }
+
         return $this->render('product/index.html.twig', [
             'header' => $header,
+            'product' => $product,
+            'sections' => $sections,
+            'offerInfo' => $offerInfo,
         ]);
     }
 }
