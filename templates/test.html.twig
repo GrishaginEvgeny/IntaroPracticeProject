@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    {% for it in offerInfo %}
+        {% for item in it.settings %}
+        {{ item.value }}
+        {% endfor %}
+        <br><br>
+    {% endfor %}
+{% endblock %}

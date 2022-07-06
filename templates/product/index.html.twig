@@ -1,20 +1,117 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include 'base/header.html.twig' %}
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <img
+                        src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3021080479.jpg"
+                        alt=""
+                        class="img-product-main">
+                <div class="row  justify-content-between mb-5">
+                    <div class="col-lg-6">
+                        <img
+                                src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013538151.jpg"
+                                alt=""
+                                class="img-product-side"
+                        style="transform: rotate(90deg);">
+                    </div>
+                    <div class="col-lg-6">
+                        <img
+                                src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013538151.jpg"
+                                alt=""
+                                class="img-product-side"
+                                style="transform: rotate(-90deg);">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <p class="fs-3 text-left pt-0 pb-0 mt-4 fw-bolder">
+                    {{ product.name ~ ', ' ~ product.vendor }}
+                </p>
+                <p class="fs-6 text-left pt-0 pb-0">
+                    <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">
+                        ГЛАВНАЯ
+                    </a>
+                    {% for section in sections %}
+                        /
+                        <a href="{{ path('app_section', {'id': section.id}) }}" class="text-decoration-none text-dark text-uppercase">
+                            {{ section.name }}
+                        </a>
+                    {% endfor %}
+                </p>
+                <p class="fs-3 text-left pt-0 pb-0 mt-1 fw-bolder">
+                    5 290 ₽
+                <p class="fs-6 text-left pt-0 pb-0">
+                <p>
+                    Pre-order
+                </p>
+                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option1">
+                    S
+                </label>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option2">
+                    M-L
+                </label>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/evgen1067/PROJECTS/BlockOne/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/evgen1067/PROJECTS/BlockOne/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <input type="radio" class="btn-check " name="options" id="option3" autocomplete="off">
+                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option3">
+                    XL
+                </label>
+                <br>
+                <button type="button" class="btn btn-dark btg-bag mt-3 rounded-0 border-0">Add to Bag</button>
+                <button class="accordion mt-3">
+                    <p class="text-left pt-0 pb-0 m-0">
+                        О товаре v
+                    </p>
+                </button>
+                <div class="panel">
+                    <p class="text-left pt-0 pb-0 m-0">
+                        Предзаказ! Отправки в течение 2-3 недель.
+                        Доставка по всему миру
+                        Оверсайз крой
+                        Ткань: футер петля 380 гр/м²
+                        Состав: 80% хлопок / 20% полиэстер
+                        Шелкография на груди, кармане и спине
+                    </p>
+                </div>
+
+                <button class="accordion mt-3">
+                    <p class="text-left pt-0 pb-0 m-0">
+                        Рекомендации по уходу v
+                    </p>
+                </button>
+                <div class="panel">
+                    <p class="text-left pt-0 pb-0 m-0">
+                        Ручная или машинная стирка до 30°;
+                        Гладить с внутренней стороны на средних температурах с большим количеством пара;
+                        Избегать контакта принта с горячими поверхностями;
+                        Сушить вдали от прямых солнечных лучей в разложенном виде.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+        </script>
+    </div>
+    {% include 'base/footer.html.twig' %}
 {% endblock %}

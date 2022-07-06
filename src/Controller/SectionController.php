@@ -12,6 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SectionController extends AbstractController
 {
+    /**
+     * @throws Exception
+     */
     #[Route('/section/{id}', name: 'app_section')]
     public function index(int $id, ManagerRegistry $doctrine): Response
     {
@@ -21,8 +24,22 @@ class SectionController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
+        $parentSections = $doctrine
+            ->getRepository(Section::class)
+            ->getParentSections($section->getId());
+
+        $header = $doctrine
+            ->getRepository(Section::class)
+            ->getHeaderSections();
+
+        $products = $doctrine
+            ->getRepository(Section::class)
+            ->getSectionOffers($section->getId());
+
         return $this->render('section/index.html.twig', [
-            'controller_name' => 'SectionController',
+            'header' => $header,
+            'parentSections' => $parentSections,
+            'products' => $products,
         ]);
     }
 }

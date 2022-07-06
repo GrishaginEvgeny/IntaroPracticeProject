@@ -1,15 +1,8 @@
-
-@import "~bootstrap/scss/bootstrap";
-=======
 * {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat Alternates', sans-serif;
     color: black;
-}
-
-.container-fluid {
-    padding: 0;
 }
 
 ul li {
@@ -68,7 +61,7 @@ ul li {
 .img-fluid img {
     border: none;
     display: block;
-    width: 100%;
+    z-index: 1;
 }
 
 .img-fluid:after {
@@ -87,15 +80,8 @@ ul li {
 }
 
 .collection-img {
-    position: relative;
-    z-index: 910;
-    display: block;
-    padding-top: 135%;
-    width: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    -webkit-background-size: contain;
-    background-size: contain;
+    height: 275px;
+    width: 275px;
 }
 
 .wrapper {
@@ -108,10 +94,89 @@ ul li {
     margin-bottom: 50px;
 }
 
+.collection-wrapper {
+    overflow: hidden;
+    margin-left: 50px;
+}
+
+.collection-wrapper > a .collection-img {
+    transition: 0.5s all ease-in-out;
+    height: 375px;
+    width: 375px;
+    object-fit: cover; /* Do not scale the image */
+}
+
+.collection-wrapper > a .collection-img:hover {
+    transform: scale(1.2);
+}
+
 .photo {
     position: relative;
 }
 .phototext {
+    position: absolute;
+    top: 70%;
+    text-transform: uppercase;
+    color: white;
+    background: #00000094;
+    padding: 10px;
+    text-align: center;
+}
+
+.img-product-main {
+    width: 750px;
+    height: 750px;
+}
+.img-product-side {
+    width: 375px;
+    height: 375px;
+}
+
+.btn-size {
+    width: 40px;
+    height: 40px;
+    font-size: 8px;
+    font-weight: bold;
+}
+.bth-check-product {
+    padding: 10px;
+    margin-right: 5px;
+}
+.btg-bag {
+    width: 300px;
+    transition-duration: 0.2s;
+}
+
+.btg-bag:hover {
+    background-color: #f18c07;
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.accordion p,
+.panel p {
+    font-size: 12px;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+.photo-text {
     position: absolute;
     text-transform: uppercase;
     color: white;
@@ -121,7 +186,7 @@ ul li {
     z-index: 911;
 }
 
-.phototext.name {
+.photo-text.name {
     top: 70%;
     white-space: nowrap;
     overflow: hidden;
@@ -130,12 +195,27 @@ ul li {
     display: block;
 }
 
-
-.phototext.price {
+.photo-text.price {
     top: calc(70% + 50px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 120px;
     display: block;
+}
+
+.home-collection-img {
+    position: relative;
+    z-index: 910;
+    display: block;
+    padding-top: 135%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+.container-fluid {
+    padding: 0;
 }
