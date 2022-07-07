@@ -36,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+
     public function getId(): ?Uuid
     {
         return $this->id;

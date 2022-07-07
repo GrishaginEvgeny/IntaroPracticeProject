@@ -60,6 +60,10 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             echo $exception;
             die();
         }
+        if (0 === count($usersResponse->users)) {
+            return false;
+        }
+        return true;
     }
 
     public function getCrmCustomer($client, $email)
@@ -72,7 +76,8 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             if (0 === count($customersResponse->customers)) return false;
             else return true;
         } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception;
+            echo $exception; // Every ApiExceptionInterface instance should implement __toString() method.
+            exit(-1);
         }
     }
 
@@ -84,7 +89,14 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
         $email = $request->request->get('email', '');
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-
+        $user = $this->userRepository->findOneByEmail($email);
+        if ($user) {
+            if (self::getCrmUser($client, $email)) {
+                $user->setRoles(['ROLE_ADMIN']);
+            } elseif (self::getCrmCustomer($client, $email)) {
+                $user->setRoles(['ROLE_USER']);
+            }
+        }
         return new Passport(
             new UserBadge($email,  function ($userIdentifier) use ($client){
                 $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
@@ -113,8 +125,8 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $email = $request->request->get('email', '');
         $user=$this->userRepository->findOneBy(['email' => $email]);
 
-        if ($user->getRoles()==['ROLE_ADMIN']) {
-            return new RedirectResponse($this->urlGenerator->generate('app_admin')); //как сгенерируем админ панель поменяю роут
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
