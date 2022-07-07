@@ -18,9 +18,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @Id
-     * @Column(type="integer")
+     * @Column(type="uuid")
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator("UserCodeGenerator")
+     * @ORM\CustomIdGenerator("doctrine.uuid_generator")
      */
     private $id;
 

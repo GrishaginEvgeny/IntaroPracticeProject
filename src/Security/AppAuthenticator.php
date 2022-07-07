@@ -60,7 +60,6 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             exit(-1);
         }
         if (0 === count($usersResponse->users)) {
-            echo 'User is not found.';
             return false;
         }
         return true;
@@ -78,7 +77,6 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             exit(-1);
         }
         if (0 === count($customersResponse->customers)) {
-            echo 'Customer is not found.';
             return false;
         }
         return true;
@@ -97,8 +95,6 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
                 $user->setRoles(['ROLE_USER']);
             }
         }
-        
-        //$user->setRoles(['ROLE_USER']);
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
@@ -117,7 +113,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $user=$this->userRepository->findOneByEmail($email);
 
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            return new RedirectResponse($this->urlGenerator->generate('admin')); //как сгенерируем админ панель поменяю роут
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
