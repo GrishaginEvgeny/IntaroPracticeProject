@@ -89,7 +89,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
         $email = $request->request->get('email', '');
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-        $user=$this->userRepository->findOneByEmail($email);
+        $user = $this->userRepository->findOneByEmail($email);
         if ($user) {
             if (self::getCrmUser($client, $email)) {
                 $user->setRoles(['ROLE_ADMIN']);
@@ -97,6 +97,8 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
                 $user->setRoles(['ROLE_USER']);
             }
         }
+        
+        //$user->setRoles(['ROLE_USER']);
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
@@ -114,7 +116,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $email = $request->request->get('email', '');
         $user=$this->userRepository->findOneByEmail($email);
 
-        if ($user->getRoles()==['ROLE_ADMIN']) {
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('app_admin')); //как сгенерируем админ панель поменяю роут
         }
         return new RedirectResponse($this->urlGenerator->generate('app_home'));

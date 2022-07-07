@@ -18,9 +18,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @Id
-     * @Column(type="uuid")
+     * @Column(type="integer")
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator("doctrine.uuid_generator")
+     * @ORM\CustomIdGenerator("UserCodeGenerator")
      */
     private $id;
 
@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-    public function getId(): ?UuidV6
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -69,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-
+        $roles[]= "ROLE_USER";
         return array_unique($roles);
     }
 
