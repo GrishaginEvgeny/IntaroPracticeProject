@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use RetailCrm\Api\Interfaces\ApiExceptionInterface;
+use RetailCrm\Api\Interfaces\ClientExceptionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use RetailCrm\Api\Factory\SimpleClientFactory;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,12 +38,16 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            echo $user->getId();
 
             $entityManager->persist($user);
             $entityManager->flush();

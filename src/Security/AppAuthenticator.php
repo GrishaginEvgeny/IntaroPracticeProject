@@ -117,7 +117,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         if ($user->getRoles()==['ROLE_ADMIN']) {
             return new RedirectResponse($this->urlGenerator->generate('app_admin')); //как сгенерируем админ панель поменяю роут
         }
-        return new RedirectResponse($this->urlGenerator->generate('app_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
