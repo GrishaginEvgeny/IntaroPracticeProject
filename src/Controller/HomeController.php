@@ -12,29 +12,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
     /**
      * @throws Exception
      */
     #[Route('/', name: 'app_home')]
     public function index(ManagerRegistry $doctrine): Response
     {
+        $limit = 8;
+
         $header = $doctrine
             ->getRepository(Section::class)
             ->getHeaderSections();
 
-        $body = [];
-
-        for ($i = 0; $i < count($header); $i++) {
-            $products = $doctrine
-                ->getRepository(Section::class)
-                ->getSectionOffers($header[$i]['id']);
-
-            $body[] = [
-                'id' => $header[$i]['id'],
-                'name' => $header[$i]['name'],
-                'products' => $products
-            ];
-        }
+        $body = $doctrine
+            ->getRepository(Section::class)
+            ->getOffersFromHomePage($limit);
 
         return $this->render('home/index.html.twig', [
             'header' => $header,
