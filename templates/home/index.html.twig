@@ -28,7 +28,7 @@
             <div class="wrapper">
                 {% for item in body %}
                     <div class="photo">
-                        <a href="{{ path('app_product', {'id': product.id}) }}">
+                        <a href="{{ path('app_product', {'id': item.id}) }}">
                             <div
                                     class="home-collection-img"
                                     style="background-image: url('upload/pictures/{{ item.picture }}');"></div>
