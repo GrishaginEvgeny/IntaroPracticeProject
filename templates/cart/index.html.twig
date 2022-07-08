@@ -15,11 +15,20 @@
     {% for product in products %}
         <ul>
             <li>
-                {{ product.getOfferId().getName() }}
-                {{ product.getOfferId().getPrice() }} рублей
-                {{ product.getOfferId().getPicture() }}
+                {{ product.getOfferId().name }}
+                {{ product.getOfferId().price }} рублей
+                {{ product.getOfferId().picture }}
+
+                <div>
+                    <a href="/cart/plus/{{ product.getOfferId().id }}">+</a>
+                    {{ product.count }}
+                    <a href="/cart/minus/{{ product.getOfferId().id }}">-</a>
+                </div>
+                {{ product.getOfferId().price * product.count }}
             </li>
         </ul>
     {% endfor %}
+    <div>Итоговая стоимость: {{ totalPrice }} <button>Оформить заказ</button></div>
+    {% include 'base/footer.html.twig' %}
 </div>
 {% endblock %}
