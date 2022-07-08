@@ -24,11 +24,11 @@
             /></a>
     </div>
     <div class="container">
-            <p class="fs-3 text-center pt-3 pb-3">Тренды сезоны</p>
+            <p class="fs-3 text-center pt-3 pb-3">Случайная подборка</p>
             <div class="wrapper">
                 {% for item in body %}
                     <div class="photo">
-                        <a href="{{ path('app_product', {'id': product.id}) }}">
+                        <a href="{{ path('app_product', {'id': item.id}) }}">
                             <div
                                     class="home-collection-img"
                                     style="background-image: url('upload/pictures/{{ item.picture }}');"></div>
