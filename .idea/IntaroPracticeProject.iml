@@ -154,6 +154,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/liip/metadata-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/liip/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfonycasts/verify-email-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/uid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-uuid" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

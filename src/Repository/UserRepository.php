@@ -56,14 +56,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->add($user, true);
     }
 
-    public function findMaxCode()
-    {
-        $qb = $this->createQueryBuilder('u');
-        $id = $qb->select($qb->expr()->max('u.id'));
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
