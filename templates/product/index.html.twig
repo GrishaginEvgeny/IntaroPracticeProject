@@ -17,7 +17,7 @@
                                 src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013538151.jpg"
                                 alt=""
                                 class="img-product-side"
-                        style="transform: rotate(90deg);">
+                                style="transform: rotate(90deg);">
                     </div>
                     <div class="col-lg-6">
                         <img
@@ -38,7 +38,8 @@
                     </a>
                     {% for section in sections %}
                         /
-                        <a href="{{ path('app_section', {'id': section.id}) }}" class="text-decoration-none text-dark text-uppercase">
+                        <a href="{{ path('app_section', {'id': section.id}) }}"
+                           class="text-decoration-none text-dark text-uppercase">
                             {{ section.name }}
                         </a>
                     {% endfor %}
@@ -62,6 +63,21 @@
                 <input type="radio" class="btn-check " name="options" id="option3" autocomplete="off">
                 <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option3">
                     XL
+                </label>
+                <br>
+                <p class="mt-3">
+                    Color
+                </p>
+                <label>
+                    <input type="button"
+                           class="btn btn btn-success btn-size bth-check-product rounded-0 btn-color-selector"
+                           onclick="Choose_color('color-selector1')" id="color-selector1">
+                    <input type="button"
+                           class="btn btn btn-danger btn-size bth-check-product rounded-0 btn-color-selector"
+                           onclick="Choose_color('color-selector2')" id="color-selector2">
+                    <input type="button"
+                           class="btn btn btn-warning btn-size bth-check-product rounded-0 btn-color-selector"
+                           onclick="Choose_color('color-selector3')" id="color-selector3">
                 </label>
                 <br>
                 <button type="button" class="btn btn-dark btg-bag mt-3 rounded-0 border-0">Add to Bag</button>
@@ -125,6 +141,20 @@
                     }
                 });
             }
+
+            function Choose_color(id){
+                var elements = document.getElementsByClassName("btn-color-selector");
+                for (i = 0; i < elements.length; i++){
+                    try{
+                        elements[i].classList.remove('btn-color-active');
+                    }catch(err){}
+                }
+                var element_choosed = document.getElementById(id);
+                element_choosed.classList.add('btn-color-active');
+            }
+
+            var inp = document.querySelector("[type='button']");
+            inp.addEventListener('click', Choose_color);
         </script>
     </div>
     {% include 'base/footer.html.twig' %}

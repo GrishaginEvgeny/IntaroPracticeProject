@@ -154,4 +154,23 @@ class SectionRepository extends ServiceEntityRepository
         $resultSet = $stmt->executeQuery(['id' => $id])->fetchAssociative();
         return $this->getParentSections($resultSet['id']);
     }
+
+    /**
+     * @throws Exception
+     * рандомные продукты для главной страницы
+     */
+    public function getOffersFromHomePage(int $limit): array
+    {
+        $sql = 'SELECT p.id, p.name, o.price, o.picture
+                FROM product p,
+                     (SELECT DISTINCT ON (of.product_id) *
+                      FROM offer of) AS o
+                WHERE o.product_id = p.id
+                ORDER BY random()
+                LIMIT :limit';
+
+        $connect = $this->getEntityManager()->getConnection();
+        $stmt = $connect->prepare($sql);
+        return $stmt->executeQuery(['limit' => $limit])->fetchAllAssociative();
+    }
 }
