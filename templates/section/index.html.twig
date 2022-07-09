@@ -21,13 +21,11 @@
         </p>
         <div class="wrapper">
             {% for item in products %}
-            <div class="photo collection-wrapper bg-image hover-zoom">
-                <a href="{{ path('app_product', {'id': item.id}) }}" class="bg-image hover-zoom">
-                    <img
-                            class="collection-img"
-                            src="{{ asset('upload/pictures/' ~ item.picture) }}"
-                            alt=""
-                    />
+            <div class="photo">
+                <a href="{{ path('app_product', {'id': item.id}) }}">
+                    <div
+                                    class="home-collection-img"
+                                    style="background-image: url('{{ asset('upload/pictures/' ~ item.picture) }}');"></div>
                     <div class="photo-text name" data-toggle="tooltip"
                          title="{{ item.name }}">{{ item.name }}</div>
                     <div class="photo-text price" data-toggle="tooltip"
