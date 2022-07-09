@@ -1,69 +1,69 @@
 <header>
+
     <div class="container-fluid">
         <p class="fs-1 text-center pt-3 pb-3 fw-bold">Khalif</p>
         <ul class="row align-items-center mx-auto text-center fs-5">
+
             <li class="col">
                 <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">главная</a>
             </li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="col">
+                    <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">личный кабинет</a>
+                </li>
+                <li class="col">
+                    <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">выйти</a>
+                </li>
+            {% else %}
             <li class="col">
-                <a href="{{ path('cart') }}" class="text-decoration-none text-dark text-uppercase">корзина</a>
-            </li>
-            <li class="col">
-                <a href="#" class="text-decoration-none text-dark text-uppercase">как купить</a>
-            </li>
-            <li class="col">
-                <a href="#" class="text-decoration-none text-dark text-uppercase">доставка</a>
-            </li>
-            <li class="col">
-                <a href="#" class="text-decoration-none text-dark text-uppercase">о магазине</a>
-            </li>
-            <li class=" col">
-                <a href="#" class="text-decoration-none text-dark text-uppercase">гарантия</a>
+                <a href="{{ path('app_register') }}" class="text-decoration-none text-dark text-uppercase">зарегистрироваться</a>
             </li>
             <li class="col">
-                <a href="#" class="text-decoration-none text-dark text-uppercase">контакты</a>
+                <a href="{{ path('app_login') }}" class="text-decoration-none text-dark text-uppercase">войти</a>
             </li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+    <div class="container-fluid">
+        <ul
+                class="row align-items-center mx-auto text-center bg-dark fs-4"
+                style="height: 80px"
+        >
+            {% for section in header %}
+                <li class="col">
+                    {% if section.children %}
+                        <div class="dropdown">
+                            <button
+                                    class="btn text-white btn-lg dropdown-toggle"
+                                    type="button"
+                                    id="{{ section.id }}"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
+                                {{ section.name }}
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="{{ section.id }}">
+                                <li><a class="dropdown-item"
+                                       href="{{ path('app_section', {'id': section.id }) }}">{{ section.name }}</a></li>
+                                {% for child in section.children %}
+                                    <li><a class="dropdown-item"
+                                           href="{{ path('app_section', {'id': child.id }) }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <a
+                                class="btn text-white btn-lg"
+                                href="{{ path('app_section', {'id': section.id }) }}"
+                        >
+                            {{ section.name }}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
         </ul>
     </div>
 </header>
-
-<div class="container-fluid">
-    <ul
-            class="row align-items-center mx-auto text-center bg-dark fs-4"
-            style="height: 80px"
-    >
-        {% for section in header %}
-            <li class="col">
-                {% if section.children %}
-                    <div class="dropdown">
-                        <button
-                                class="btn text-white btn-lg dropdown-toggle"
-                                type="button"
-                                id="{{ section.id }}"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                        >
-                            {{ section.name }}
-                        </button>
-
-                        <ul class="dropdown-menu" aria-labelledby="{{ section.id }}">
-                            <li><a class="dropdown-item"
-                                   href="{{ path('app_section', {'id': section.id }) }}">{{ section.name }}</a></li>
-                            {% for child in section.children %}
-                                <li><a class="dropdown-item"
-                                       href="{{ path('app_section', {'id': child.id }) }}">{{ child.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% else %}
-                    <a
-                            class="btn text-white btn-lg"
-                            href="{{ path('app_section', {'id': section.id }) }}"
-                    >
-                        {{ section.name }}
-                    </a>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-</div>

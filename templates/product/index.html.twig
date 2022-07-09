@@ -65,7 +65,6 @@
                     XL
                 </label>
                 <br>
-                <button type="button" class="btn btn-dark btg-bag mt-3 rounded-0 border-0"><a href="{{ path('add_to_cart', {'id': product.id}) }}">Add to Bag</a></button>
                 <p class="mt-3">
                     Color
                 </p>
@@ -81,7 +80,7 @@
                            onclick="Choose_color('color-selector3')" id="color-selector3">
                 </label>
                 <br>
-                <button type="button" class="btn btn-dark btg-bag mt-3 rounded-0 border-0">Add to Bag</button>
+                <button type="button" class="btn btn-dark btg-bag mt-3 rounded-0 border-0"><a class="text-decoration-none" style="color: white" href="{{ path('add_to_cart', {'id': product.id}) }}">Add to Bag</a></button>
                 <button class="accordion mt-3">
                     <div class="d-flex align-items-center">
                         <p class="text-left pt-0 pb-0 m-0">

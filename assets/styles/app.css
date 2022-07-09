@@ -191,7 +191,7 @@ ul li {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 260px;
+    width: 90%;
     display: block;
 }
 
@@ -200,7 +200,7 @@ ul li {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 120px;
+    width: 70%;
     display: block;
 }
 
