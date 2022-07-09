@@ -13,68 +13,70 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-    private SessionInterface $session;
-
     /**
-     * возможно сюда можно передавать сущность User, а не его id, с другой стороны зачем
-     * у меня была какая-то проблема с логином поэтому я пока так оставил
-     *
+     * страничка корзины только для авторизованных пользователей
+     * если неавторизован - редирект на логин
      * @param ShopCartRepository $cartRepository
      * @return Response
      */
     #[Route('/cart', name: 'cart')]
     public function index(ShopCartRepository $cartRepository): Response
     {
-
-        $userId = '1';
-        $products = $cartRepository->findBy(
-            ['user_id' => $userId],
-            ['id' => 'ASC']
-        );
-        $totalPrice=0;
-        foreach ($products as $product){
-            $totalPrice+=$product->getOfferId()->getPrice()*$product->getCount();
+        $user=$this->getUser();
+        if ($user) {
+            //выводим все товары юзера
+            $offers = $cartRepository->findBy(
+                ['email' => $user->getUserIdentifier()],
+                ['id' => 'ASC']
+            );
+            $totalPrice=0;
+            //сразу считаем итоговую стоимость
+            foreach ($offers as $offer){
+                $totalPrice+=$offer->getOfferId()->getPrice()*$offer->getCount();
+            }
+            return $this->render('cart/index.html.twig', [
+                'offers' => $offers,
+                'totalPrice' => $totalPrice,
+            ]);
         }
-        //shopCart хранит в себе сущности офферов
-        return $this->render('cart/index.html.twig', [
-            'products' => $products,
-            'totalPrice' => $totalPrice
-        ]);
+        else return $this->redirectToRoute('app_login');
     }
 
-    /**
-     * возможно сюда можно передавать сущность User
-     * нужно будет поменять ссылку product на offer, но для начала нужно как-то сформировать offer
-     * (offer сформирован, надо обновить)
-     *
-     * @param Offer $offers
+    /** добавить в корзину
+     * если пользователь не авторизован - редирект на логин
+     * если такой-же офер не существует, записываем его в корзину, кол-во=1
+     * если офер есть, увеличиваем его кол-во в корзине
+     * @param Offer $offer
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route('/product/{id}/to_cart', name: 'add_to_cart')]
-    public function addToCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
+    public function addToCart(Offer $offer, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $userId = '1';
-        $product = $cartRepository->findOneBy([
-            'user_id' => $userId,
-            'offer_id' => $offers->getId(),
-        ]);
-        if(!$product){
-            $shopCart = (new ShopCart())
-                -> setOfferId($offers)
-                -> setCount(1)
-                -> setUserId($userId);
-            $entityManager->persist($shopCart);
+        $user=$this->getUser();
+        if($user){
+            $product = $cartRepository->findOneBy([
+                'email' => $user->getUserIdentifier(),
+                'offer_id' => $offer->getId(),
+            ]);
+            if(!$product){
+                $shopCart = (new ShopCart())
+                    -> setOfferId($offer)
+                    -> setCount(1)
+                    -> setEmail($user->getUserIdentifier());
+                $entityManager->persist($shopCart);
+            }
+            else {
+                $product->setCount(($product->getCount()+1));
+                $entityManager->persist($product);
+            }
+            $entityManager->flush();
+            return $this->redirectToRoute('app_product', ['id'=>$offer->getProduct()->getId()]);
         }
-        else {
-            $product->setCount(($product->getCount()+1));
-            $entityManager->persist($product);
-        }
-        $entityManager->flush();
-        return $this->redirectToRoute('app_product', ['id'=>$offers->getId()]);
+        else return $this->redirectToRoute('app_login');
     }
 
-    /** убавление товара из корзины
+    /** убавление из корзины
      *
      * @param Offer $offers
      * @param ShopCartRepository $cartRepository
@@ -84,9 +86,9 @@ class CartController extends AbstractController
     #[Route('/cart/minus/{id}', name: 'delete_from_cart')]
     public function deleteFromCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $userId = '1';
+        $user=$this->getUser();
         $product = $cartRepository->findOneBy([
-            'user_id' => $userId,
+            'email' => $user->getUserIdentifier(),
             'offer_id' => $offers->getId(),
         ]);
         $count=$product->getCount()-1;
@@ -110,9 +112,9 @@ class CartController extends AbstractController
     #[Route('/cart/plus/{id}', name: 'add_count_cart')]
     public function addCountCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $userId = '1';
+        $user=$this->getUser();
         $product = $cartRepository->findOneBy([
-            'user_id' => $userId,
+            'email' => $user->getUserIdentifier(),
             'offer_id' => $offers->getId(),
         ]);
         $product->setCount(($product->getCount()+1));

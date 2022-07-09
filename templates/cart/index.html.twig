@@ -12,19 +12,19 @@
     <h1>Корзина</h1>
 
     Товары
-    {% for product in products %}
+    {% for offer in offers %}
         <ul>
             <li>
-                {{ product.getOfferId().name }}
-                {{ product.getOfferId().price }} рублей
-                {{ product.getOfferId().picture }}
+                <a href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
+                {{ offer.getOfferId().price }} рублей
+                {{ offer.getOfferId().picture }}
 
                 <div>
-                    <a href="/cart/plus/{{ product.getOfferId().id }}">+</a>
-                    {{ product.count }}
-                    <a href="/cart/minus/{{ product.getOfferId().id }}">-</a>
+                    <a href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
+                    {{ offer.count }}
+                    <a href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
                 </div>
-                {{ product.getOfferId().price * product.count }}
+                {{ offer.getOfferId().price * offer.count }}
             </li>
         </ul>
     {% endfor %}
