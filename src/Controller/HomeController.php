@@ -26,7 +26,7 @@ class HomeController extends AbstractController
             ->getHeaderSections();
 
         $body = $doctrine
-            ->getRepository(Section::class)
+            ->getRepository(Offer::class)
             ->getOffersFromHomePage($limit);
 
         return $this->render('home/index.html.twig', [

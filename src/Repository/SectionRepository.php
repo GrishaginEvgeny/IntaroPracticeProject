@@ -126,12 +126,13 @@ class SectionRepository extends ServiceEntityRepository
                      offer o
                 WHERE c.id = ps.section_id
                   AND p.id = ps.product_id
-                  AND o.product_id = p.id';
+                  AND o.product_id = p.id
+                  AND p.active = true
+                  AND o.active = true';
 
         $connect = $this->getEntityManager()->getConnection();
         $stmt = $connect->prepare($sql);
-        $resultSet = $stmt->executeQuery(['id' => $id]);
-        return $stmt->executeQuery()->fetchAllAssociative();
+        return $stmt->executeQuery(['id' => $id])->fetchAllAssociative();
     }
 
     /**
@@ -153,24 +154,5 @@ class SectionRepository extends ServiceEntityRepository
         $stmt = $connect->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id])->fetchAssociative();
         return $this->getParentSections($resultSet['id']);
-    }
-
-    /**
-     * @throws Exception
-     * рандомные продукты для главной страницы
-     */
-    public function getOffersFromHomePage(int $limit): array
-    {
-        $sql = 'SELECT p.id, p.name, o.price, o.picture
-                FROM product p,
-                     (SELECT DISTINCT ON (of.product_id) *
-                      FROM offer of) AS o
-                WHERE o.product_id = p.id
-                ORDER BY random()
-                LIMIT :limit';
-
-        $connect = $this->getEntityManager()->getConnection();
-        $stmt = $connect->prepare($sql);
-        return $stmt->executeQuery(['limit' => $limit])->fetchAllAssociative();
     }
 }
