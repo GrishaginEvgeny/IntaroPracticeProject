@@ -73,7 +73,7 @@ class Section
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->addCategory($this);
+            $product->addSection($this);
         }
 
         return $this;
@@ -83,7 +83,7 @@ class Section
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
-            $product->removeCategory($this);
+            $product->removeSection($this);
         }
 
         return $this;
@@ -111,5 +111,10 @@ class Section
         $this->xmlId = $xmlId;
 
         return $this;
+    }
+    
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }
