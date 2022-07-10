@@ -5,38 +5,36 @@
         <ul class="row align-items-center mx-auto text-center fs-5">
 
             <li class="col">
-                <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">главная</a>
+                <a href="{{ path('app_home') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">главная</a>
             </li>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li class="col">
-                    <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">личный кабинет</a>
+                    <a href="{{ path('app_home') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">личный кабинет</a>
                 </li>
                 <li class="col">
-                    <a href="{{ path('app_home') }}" class="text-decoration-none text-dark text-uppercase">выйти</a>
+                    <a href="{{ path('app_home') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">выйти</a>
                 </li>
             {% else %}
             <li class="col">
-                <a href="{{ path('app_register') }}" class="text-decoration-none text-dark text-uppercase">зарегистрироваться</a>
+                <a href="{{ path('app_register') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">зарегистрироваться</a>
             </li>
             <li class="col">
-                <a href="{{ path('app_login') }}" class="text-decoration-none text-dark text-uppercase">войти</a>
+                <a href="{{ path('app_login') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">войти</a>
             </li>
             {% endif %}
-
         </ul>
     </div>
 
     <div class="container-fluid">
         <ul
-                class="row align-items-center mx-auto text-center bg-dark fs-4"
-                style="height: 80px"
+                class="row align-items-center mx-auto text-center bg-dark fs-4 mb-0"
         >
             {% for section in header %}
                 <li class="col">
                     {% if section.children %}
                         <div class="dropdown">
                             <button
-                                    class="btn text-white btn-lg dropdown-toggle"
+                                    class="nav-button btn text-white btn-lg dropdown-toggle"
                                     type="button"
                                     id="{{ section.id }}"
                                     data-bs-toggle="dropdown"
@@ -56,7 +54,7 @@
                         </div>
                     {% else %}
                         <a
-                                class="btn text-white btn-lg"
+                                class="nav-button btn text-white btn-lg"
                                 href="{{ path('app_section', {'id': section.id }) }}"
                         >
                             {{ section.name }}

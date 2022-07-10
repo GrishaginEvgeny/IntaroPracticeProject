@@ -24,10 +24,21 @@ ul li {
 }
 .img-fluid {
     text-align: center;
-    display: inline-block;
+    display: block;
     overflow: hidden;
     position: relative;
     text-decoration: none;
+}
+.img-of-collections{
+    position: relative;
+    z-index: 1;
+    display: block;
+    height: 70vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-position: center center;
+    background-size: cover;
 }
 .img-fluid:before {
     display: block;
@@ -64,9 +75,39 @@ ul li {
     z-index: 1;
 }
 
+.header-nav-site{
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.header-nav-site:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px; /* Высота линии */
+    background-color: black; /* Цвет подчеркивания при исчезании линии*/
+    transition: width 0.7s; /* Время эффекта */
+}
+
+.header-nav-site:hover:after {
+    content: "";
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px; /* Высота линии */
+    background-color: black; /* Цвет подчеркивания при появлении линии*/
+    transition: width 0.7s;  /* Время эффекта */
+}
+
 .img-fluid:after {
     -webkit-transition: all 600ms ease-in-out;
-    transition: all 1000ms ease-in-out;
 }
 
 .img-fluid:hover:before {
@@ -145,6 +186,10 @@ ul li {
 .btg-bag {
     width: 300px;
     transition-duration: 0.2s;
+}
+
+.nav-button:hover{
+    --bs-text-opacity: 0.7;
 }
 
 .btg-bag:hover {

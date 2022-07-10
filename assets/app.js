@@ -14,6 +14,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
 import './styles/app.css';
+import './img/zamai.png';
+import './img/lida.webp';
 
 import '@fontsource/montserrat-alternates/100.css';
 import '@fontsource/montserrat-alternates/200.css';
