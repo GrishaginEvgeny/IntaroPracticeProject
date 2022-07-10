@@ -35,5 +35,34 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if hasPreviousPage == true %}
+                    <li class="page-item">
+                        <a href="/section/{{ parentSections|last.id }}?page={{ currentPage - 1 }}" class="btn btn-bd-pagination me-3">Назад</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="/section/{{ parentSections|last.id }}?page=1" class="btn btn-bd-pagination me-3">1</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="btn btn-bd-pagination me-3 disabled">Назад</a>
+                    </li>
+                {% endif %}
+                {% if hasNextPage == true %}
+                    <li class="page-item">
+                        <a href="/section/{{ parentSections|last.id }}?page={{ currentPage + 1 }}" class="btn btn-bd-pagination">Далее</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="btn btn-bd-pagination disabled">Далее</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
     {% include 'base/footer.html.twig' %}
 {% endblock %}
