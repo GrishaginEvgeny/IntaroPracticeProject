@@ -58,12 +58,8 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             else return true;
         } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
             echo $exception;
-            die();
+            exit(-1);
         }
-        if (0 === count($usersResponse->users)) {
-            return false;
-        }
-        return true;
     }
 
     public function getCrmCustomer($client, $email)
@@ -76,7 +72,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             if (0 === count($customersResponse->customers)) return false;
             else return true;
         } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception; // Every ApiExceptionInterface instance should implement __toString() method.
+            echo $exception;
             exit(-1);
         }
     }
