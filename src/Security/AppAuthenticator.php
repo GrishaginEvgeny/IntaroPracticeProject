@@ -82,30 +82,10 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
      */
     public function authenticate(Request $request): Passport
     {
-        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
         $email = $request->request->get('email', '');
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-        $user = $this->userRepository->findOneByEmail($email);
-        if ($user) {
-            if (self::getCrmUser($client, $email)) {
-                $user->setRoles(['ROLE_ADMIN']);
-            } elseif (self::getCrmCustomer($client, $email)) {
-                $user->setRoles(['ROLE_USER']);
-            }
-        }
         return new Passport(
-            new UserBadge($email,  function ($userIdentifier) use ($client){
-                $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
-                if ($user) {
-                    if (self::getCrmUser($client, $userIdentifier)) {
-                        $user->setRoles(['ROLE_ADMIN']);
-                    } elseif (self::getCrmCustomer($client, $userIdentifier)) {
-                        $user->setRoles(['ROLE_USER']);
-                    }
-                }
-
-                return $user;
-            }),
+            new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
@@ -122,6 +102,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $user=$this->userRepository->findOneBy(['email' => $email]);
 
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            // dd($user);
             return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
