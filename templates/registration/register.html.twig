@@ -15,3 +15,61 @@
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    {{ form_start(registrationForm) }}
+                                    <form method="post" class="section text-center">
+                                        <h4 class="mb-4 pb-3">Регистрация</h4>
+                                        <div class="form-group">
+                                            <input
+                                                    type="text"
+                                                    name="logname"
+                                                    class="form-style"
+                                                    placeholder="Введите фИО"
+                                                    id="logname"
+                                                    autocomplete="off"
+                                            />
+                                            <i class="input-icon uil uil-user"></i>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input
+                                                    type="email"
+                                                    name="logemail"
+                                                    class="form-style"
+                                                    placeholder="Введите Email"
+                                                    id="logemail"
+                                                    autocomplete="off"
+                                            />
+                                            <i class="input-icon uil uil-at"></i>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <input
+                                                    type="password"
+                                                    name="logpass"
+                                                    class="form-style"
+                                                    placeholder="Введите пароль"
+                                                    id="logpass"
+                                                    autocomplete="off"
+                                            />
+                                            <i class="input-icon uil uil-lock-alt"></i>
+                                        </div>
+                                        <a href="#" class="btn mt-4">Зарегистрироваться</a>
+                                    </form>
+                                    {{ form_end(registrationForm) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

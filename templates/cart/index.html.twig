@@ -12,14 +12,23 @@
     <h1>Корзина</h1>
 
     Товары
-    {% for product in products %}
+    {% for offer in offers %}
         <ul>
             <li>
-                {{ product.getOfferId().getName() }}
-                {{ product.getOfferId().getPrice() }} рублей
-                {{ product.getOfferId().getPicture() }}
+                <a href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
+                {{ offer.getOfferId().price }} рублей
+                {{ offer.getOfferId().picture }}
+
+                <div>
+                    <a href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
+                    {{ offer.count }}
+                    <a href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
+                </div>
+                {{ offer.getOfferId().price * offer.count }}
             </li>
         </ul>
     {% endfor %}
+    <div>Итоговая стоимость: {{ totalPrice }} <button>Оформить заказ</button></div>
+    {% include 'base/footer.html.twig' %}
 </div>
 {% endblock %}

@@ -4,7 +4,7 @@ namespace App\Security;
 
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\DependencyInjection\Container;
+use RetailCrm\Api\Exception\Client\BuilderException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use RetailCrm\Api\Factory\SimpleClientFactory;
@@ -20,7 +20,6 @@ use RetailCrm\Api\Model\Request\Customers\CustomersRequest;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
@@ -40,7 +39,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(ManagerRegistry $doctrine, UserRepository $userRepository, UrlGeneratorInterface $urlGenerator, $crmConfigPath='../config/apiKey.ini')
+    public function __construct(ManagerRegistry $doctrine, UserRepository $userRepository, UrlGeneratorInterface $urlGenerator)
     {
         $this->apiKey = $_ENV['RETAIL_CRM_API_KEY'];
         $this->urlGenerator = $urlGenerator;
@@ -55,12 +54,13 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $usersRequest->filter->email = $email;
         try {
             $usersResponse = $client->users->list($usersRequest);
+            if (0 === count($usersResponse->users)) return false;
+            else return true;
         } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception; // Every ApiExceptionInterface instance should implement __toString() method.
-            exit(-1);
+            echo $exception;
+            die();
         }
         if (0 === count($usersResponse->users)) {
-            echo 'User is not found.';
             return false;
         }
         return true;
@@ -73,23 +73,23 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $customersRequest->filter->email = $email;
         try {
             $customersResponse = $client->customers->list($customersRequest);
+            if (0 === count($customersResponse->customers)) return false;
+            else return true;
         } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
             echo $exception; // Every ApiExceptionInterface instance should implement __toString() method.
             exit(-1);
         }
-        if (0 === count($customersResponse->customers)) {
-            echo 'Customer is not found.';
-            return false;
-        }
-        return true;
     }
 
+    /**
+     * @throws BuilderException
+     */
     public function authenticate(Request $request): Passport
     {
         $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
         $email = $request->request->get('email', '');
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-        $user=$this->userRepository->findOneByEmail($email);
+        $user = $this->userRepository->findOneByEmail($email);
         if ($user) {
             if (self::getCrmUser($client, $email)) {
                 $user->setRoles(['ROLE_ADMIN']);
@@ -98,7 +98,18 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             }
         }
         return new Passport(
-            new UserBadge($email),
+            new UserBadge($email,  function ($userIdentifier) use ($client){
+                $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
+                if ($user) {
+                    if (self::getCrmUser($client, $userIdentifier)) {
+                        $user->setRoles(['ROLE_ADMIN']);
+                    } elseif (self::getCrmCustomer($client, $userIdentifier)) {
+                        $user->setRoles(['ROLE_USER']);
+                    }
+                }
+
+                return $user;
+            }),
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
@@ -112,10 +123,10 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
         $email = $request->request->get('email', '');
-        $user=$this->userRepository->findOneByEmail($email);
+        $user=$this->userRepository->findOneBy(['email' => $email]);
 
-        if ($user->getRoles()==['ROLE_ADMIN']) {
-            return new RedirectResponse($this->urlGenerator->generate('app_admin')); //как сгенерируем админ панель поменяю роут
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
