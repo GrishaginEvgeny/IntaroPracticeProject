@@ -19,6 +19,7 @@ class ProductController extends AbstractController
     #[Route('/product/{id}', name: 'app_product')]
     public function index(int $id, ManagerRegistry $doctrine): Response
     {
+        $sortClothesValues = ['XS'=>'0', 'S'=>'1', 'M'=>'2', 'L'=>'3', 'XL'=>'4'];
         $product = $doctrine->getRepository(Product::class)->findOneBy(['id' => $id]);
 
         if (!$product) {
@@ -54,9 +55,13 @@ class ProductController extends AbstractController
                 'price' => $resultSet[$i]['price'],
                 'picture' => $resultSet[$i]['picture'],
                 'settings' => $settings,
+                'sortByValue' => $sortClothesValues[$settings[2]['value']],
             ];
             $i += count($settings);
         }
+
+        usort($offerInfo, [ProductController::class, "sortByValue"]);
+
 
         return $this->render('product/index.html.twig', [
             'header' => $header,
@@ -64,5 +69,10 @@ class ProductController extends AbstractController
             'sections' => $sections,
             'offerInfo' => $offerInfo,
         ]);
+    }
+
+    function sortByValue($a, $b): int
+    {
+       return $a['sortByValue'] <=> $b['sortByValue'];
     }
 }

@@ -38,7 +38,7 @@ class SectionController extends AbstractController
             ->getRepository(Section::class)
             ->getSectionOffers($section->getId());
 
-        $productsOnPage = 6;
+        $productsOnPage = 8;
 
         /**
          * текущая страница
