@@ -16,7 +16,6 @@
                                     {{ form_start(registrationForm) }}
                                     <br><br>
                                         <h4 class="mb-4 pb-3">Регистрация</h4>
-                                        
                                         <div class="form-group mt-2">
                                             {{ form_widget(registrationForm.email, {'attr': {'class': 'form-style', 'placeholder': 'Введите email'},}) }}
                                         </div>
@@ -43,19 +42,10 @@
                                             Выберите пол
                                             {{ form_widget(registrationForm.sex, {'attr': {'class': 'd-flex justify-content-between'},}) }}
                                         </div>
-<<<<<<< HEAD
                                         <button type="submit" class="btn mt-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>  
                                         {{ form_rest(registrationForm) }}
                                     <br><br>
-=======
-                                        <div class="form-group mt-2 notactive">
-                                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': ''}}) }}
-                                        </div>
-                                        <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>                                    
-                                        </form>
->>>>>>> ed4d08cd67614a3091f8b28a7925ed2bbf4c3309
                                     {{ form_end(registrationForm) }}
-                                    
                                 </div>
                             </div>
                         </div>
