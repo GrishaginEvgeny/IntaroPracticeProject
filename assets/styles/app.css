@@ -478,3 +478,11 @@ h6 span {
 .registration_form_birthdate_monthgroup {
   background: rgba(0, 0, 0, 0.3);
 }
+.form-check-input:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.notactive {
+  display: none !important;
+}
