@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block body %}
+    <br>
+    Фамилия: {{ lName }}
+    <br>
+    Имя: {{ fName }}
+    <br>
+    Отчество: {{ patronymic }}
+    <br>
+    Пол: {{ sex }}
+    <br>
+    Почта: {{ email }}
+    <br>
+    Телефон: {{ number }}
+    <br>
+    День рождения: {{ birthday|date('d.m.Y h:i:s') }}
+    <br>
+{#    Пол: {{ sex }}#}
+{#    <br>#}
+    Адрес доставки: {{ address }}
+    <br>
+    <h1>Ваши заказы:</h1>
+
+
+    {% for order in orders %}
+        <h2>Заказ:</h2>
+        <br>
+        Id заказа: {{ order.number }}
+        <br>
+        Дата оформления: {{ order.date|date('d.m.Y h:i:s') }}
+        <br>
+        Статус: {{ order.status }}
+        <br>
+        Способ оплаты: {{ order.typePayment }}
+        <br>
+        Цена: {{ order.summ }}
+        <hr>
+        {% for item in order.items %}
+            <h2>Товар:</h2>
+            <br>
+            Название товара: {{ item.name }}
+            <br>
+            Размер товара: {{ item.size }}
+            <br>
+            Цвет товара: {{ item.color }}
+            <br>
+            Стоимость: {{ item.summ }}
+            <br>
+            Количество: {{ item.quantity }}
+
+        {% endfor %}
+        <hr>
+    {% endfor %}
+{% endblock %}
