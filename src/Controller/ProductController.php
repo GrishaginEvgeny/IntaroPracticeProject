@@ -49,7 +49,7 @@ class ProductController extends AbstractController
                     ];
                 }
             }
-            $offerInfo[$resultSet[$i]['o_id']] = [
+            $offerInfo[$i] = [
                 'o_id' => $resultSet[$i]['o_id'],
                 'price' => $resultSet[$i]['price'],
                 'picture' => $resultSet[$i]['picture'],
