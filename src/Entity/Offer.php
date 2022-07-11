@@ -50,7 +50,7 @@ class Offer
     private $active;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="offers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
@@ -200,5 +200,10 @@ class Offer
         $this->picture = $picture;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getId() . " " . $this->getName() . " " . $this->getQuantity() . " " . $this->getUnit();
     }
 }

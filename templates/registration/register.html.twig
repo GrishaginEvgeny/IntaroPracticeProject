@@ -14,9 +14,8 @@
                             <div class="card-front">
                                 <div class="center-wrap">
                                     {{ form_start(registrationForm) }}
-                                    <form method="post" class="section text-center">
+                                    <br><br>
                                         <h4 class="mb-4 pb-3">Регистрация</h4>
-                                        
                                         <div class="form-group mt-2">
                                             {{ form_widget(registrationForm.email, {'attr': {'class': 'form-style', 'placeholder': 'Введите email'},}) }}
                                         </div>
@@ -43,11 +42,9 @@
                                             Выберите пол
                                             {{ form_widget(registrationForm.sex, {'attr': {'class': 'd-flex justify-content-between'},}) }}
                                         </div>
-                                        <div class="form-group mt-2 notactive">
-                                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': ''}}) }}
-                                        </div>
-                                        <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>                                    
-                                        </form>
+                                        <button type="submit" class="btn mt-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>  
+                                        {{ form_rest(registrationForm) }}
+                                    <br><br>
                                     {{ form_end(registrationForm) }}
                                 </div>
                             </div>
