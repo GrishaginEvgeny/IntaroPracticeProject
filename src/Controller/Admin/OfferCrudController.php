@@ -19,7 +19,7 @@ class OfferCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            MoneyField::new('price'),
+            MoneyField::new('price')->setCurrency("RUB"),
             IntegerField::new('quantity'),
             TextField::new('unit'),
         ];

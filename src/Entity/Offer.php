@@ -201,4 +201,9 @@ class Offer
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getId() . " " . $this->getName() . " " . $this->getQuantity() . " " . $this->getUnit();
+    }
 }
