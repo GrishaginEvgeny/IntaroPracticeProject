@@ -45,7 +45,7 @@ class Product
     private $sections;
 
     /**
-     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="product", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
      */
     private $offers;
 
@@ -147,6 +147,7 @@ class Product
         return $this->offers;
     }
 
+    
     public function addOffer(Offer $offer): self
     {
         if (!$this->offers->contains($offer)) {

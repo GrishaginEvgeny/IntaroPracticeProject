@@ -43,24 +43,19 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Admin Panel')
+            ->setTitle('Админ панель')
             ->disableUrlSignatures();
     }
 
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            //MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
 
-            MenuItem::section('Products'),
-            MenuItem::linkToCrud('List Products', 'fas fa-list', Product::class),
-            // MenuItem::subMenu('List'),
-
-            MenuItem::section('Sections'),
-            MenuItem::linkToCrud('List Sections', 'fas fa-list', Section::class),
-
-            MenuItem::section('Users'),
-            MenuItem::linkToCrud('List Users', 'fas fa-list', User::class),
+            MenuItem::section('Разделы'),
+            MenuItem::linkToCrud('Продукты | Products', 'fas fa-list', Product::class),
+            MenuItem::linkToCrud('Секции | Sections', 'fas fa-list', Section::class),
+            MenuItem::linkToCrud('Пользователи | Users', 'fas fa-list', User::class),
         ];
     }
 }

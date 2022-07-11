@@ -50,7 +50,7 @@ class Offer
     private $active;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="offers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
