@@ -8,20 +8,20 @@
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <img
-                        src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3021080479.jpg"
+                        src=/upload/pictures/{{ offerInfo.0.picture }}
                         alt=""
                         class="img-product-main">
                 <div class="row  justify-content-between mb-5">
                     <div class="col-lg-6">
                         <img
-                                src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013538151.jpg"
+                                src=/upload/pictures/{{ offerInfo.0.picture }}
                                 alt=""
                                 class="img-product-side"
                                 style="transform: rotate(90deg);">
                     </div>
                     <div class="col-lg-6">
                         <img
-                                src="https://d2j6dbq0eux0bg.cloudfront.net/images/10796017/3013538151.jpg"
+                                src=/upload/pictures/{{ offerInfo.0.picture }}
                                 alt=""
                                 class="img-product-side"
                                 style="transform: rotate(-90deg);">
@@ -50,25 +50,33 @@
                 <p>
                     Pre-order
                 </p>
-                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
-                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option1">
-                    S
+                {% set newArray = [] %}
+                {% set option = 1 %}
+                {% for offer in offerInfo %}
+                    {% if offer.settings[2].value not in newArray %}
+                <input type="radio" class="btn-check" name="options" id="option{{ option }}" autocomplete="off">
+                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option{{ option }}">
+                    {{ offer.settings[2].value }}
                 </label>
-
-                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option2">
-                    M-L
-                </label>
-
-                <input type="radio" class="btn-check " name="options" id="option3" autocomplete="off">
-                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option3">
-                    XL
-                </label>
+                        {% set newArray = newArray|merge([offer.settings[2].value]) %}
+                        {% set option = option + 1 %}
+                    {% endif %}
+                {% endfor %}
                 <br>
                 <p class="mt-3">
                     Color
                 </p>
                 <label>
+                    {% set newArray = [] %}
+                    {% for offer in offerInfo %}
+                        {% if offer.settings[1].value not in newArray %}
+                            <input type="button"
+                                   class="btn btn btn-danger btn-size bth-check-product rounded-0 btn-color-selector"
+                                   onclick="Choose_color('color-selector2')" id="color-selector2">
+                            {{ offer.settings[1].value }}
+                            {% set newArray = newArray|merge([offer.settings[1].value]) %}
+                        {% endif %}
+                    {% endfor %}
                     <input type="button"
                            class="btn btn btn-success btn-size bth-check-product rounded-0 btn-color-selector"
                            onclick="Choose_color('color-selector1')" id="color-selector1">
