@@ -3,72 +3,59 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Регистрация</h1>
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+    <div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    {{ form_start(registrationForm) }}
+                                    <form method="post" class="section text-center">
+                                        <h4 class="mb-4 pb-3">Регистрация</h4>
+                                        
+                                        <div class="form-group mt-2">
+                                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-style', 'placeholder': 'Введите email'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-style', 'placeholder': 'Введите пароль'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-style', 'placeholder': 'Введите фамилию'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-style', 'placeholder': 'Введите имя'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            {{ form_widget(registrationForm.patronymic, {'attr': {'class': 'form-style', 'placeholder': 'Введите отчество'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-style', 'placeholder': 'Введите номер телефона'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            Введите дату рождения
+                                            {{ form_widget(registrationForm.birthdate, {'attr': {'class': 'border border-dark rounded'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            Выберите пол
+                                            {{ form_widget(registrationForm.sex, {'attr': {'class': 'd-flex justify-content-between'},}) }}
+                                        </div>
+                                        <div class="form-group mt-2 notactive">
+                                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': ''}}) }}
+                                        </div>
+                                        <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>                                    
+                                        </form>
+                                    {{ form_end(registrationForm) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
-{#<div class="section">#}
-{#    <div class="container">#}
-{#        <div class="row full-height justify-content-center">#}
-{#            <div class="col-12 text-center align-self-center py-5">#}
-{#                <div class="section pb-5 pt-5 pt-sm-2 text-center">#}
-{#                    <label for="reg-log"></label>#}
-{#                    <div class="card-3d-wrap mx-auto">#}
-{#                        <div class="card-3d-wrapper">#}
-{#                            <div class="card-front">#}
-{#                                <div class="center-wrap">#}
-{#                                    {{ form_start(registrationForm) }}#}
-{#                                    <form method="post" class="section text-center">#}
-{#                                        <h4 class="mb-4 pb-3">Регистрация</h4>#}
-{#                                        <div class="form-group">#}
-{#                                            <input#}
-{#                                                    type="text"#}
-{#                                                    name="logname"#}
-{#                                                    class="form-style"#}
-{#                                                    placeholder="Введите фИО"#}
-{#                                                    id="logname"#}
-{#                                                    autocomplete="off"#}
-{#                                            />#}
-{#                                            <i class="input-icon uil uil-user"></i>#}
-{#                                        </div>#}
-{#                                        <div class="form-group mt-2">#}
-{#                                            <input#}
-{#                                                    type="email"#}
-{#                                                    name="logemail"#}
-{#                                                    class="form-style"#}
-{#                                                    placeholder="Введите Email"#}
-{#                                                    id="logemail"#}
-{#                                                    autocomplete="off"#}
-{#                                            />#}
-{#                                            <i class="input-icon uil uil-at"></i>#}
-{#                                        </div>#}
-{#                                        <div class="form-group mt-2">#}
-{#                                            <input#}
-{#                                                    type="password"#}
-{#                                                    name="logpass"#}
-{#                                                    class="form-style"#}
-{#                                                    placeholder="Введите пароль"#}
-{#                                                    id="logpass"#}
-{#                                                    autocomplete="off"#}
-{#                                            />#}
-{#                                            <i class="input-icon uil uil-lock-alt"></i>#}
-{#                                        </div>#}
-{#                                        <a href="#" class="btn mt-4">Зарегистрироваться</a>#}
-{#                                    </form>#}
-{#                                    {{ form_end(registrationForm) }}#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
