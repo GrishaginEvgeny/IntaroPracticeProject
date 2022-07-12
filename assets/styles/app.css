@@ -536,3 +536,93 @@ h6 span {
 .notactive {
   display: none !important;
 }
+
+
+
+
+
+.lkHr {
+  border-right: solid 1px #aaa;
+  opacity: 1;
+}
+
+.lkBlock {
+
+  border: solid 1px #aaa;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+
+
+
+.lkBox{
+  background-color: black;
+  border-radius: 30px;
+  margin-top: 40px;
+}
+.lkPanel {
+  margin-top: 85px;
+  justify-content: center;
+}
+.lkPanelButton {
+  background: black;
+  text-transform: uppercase;
+  width: 160px;
+  border-color: black;
+}
+.lkPanelButton:hover {
+  border-color: white;
+  border-radius: 30px;
+}
+.lkStatist{
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+.lkPhoto{
+  object-fit: cover;
+  height: 200px;
+  width: 220px;
+  border-radius: 100px;
+}
+.lkNick{
+  text-align:center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+.lkInfo{
+  margin-left: 5%;
+  width: 72%;
+  margin-top: 6%;
+  margin-bottom: 8%;
+  border-radius: 30px;
+  border: solid 1px white;
+}
+
+.lkLabel {
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.lkInputHelp {
+  color: white;
+  background-color: black;
+  border:0;
+  border-bottom: 1px solid white;
+}
+
+
+#close::-webkit-scrollbar {
+  width: 6px;               /* ширина scrollbar */
+}
+#close::-webkit-scrollbar-track {
+  background: #141111;        /* цвет дорожки */
+}
+#close::-webkit-scrollbar-thumb {
+  background-color: gray;    /* цвет плашки */
+  border-radius: 20px;       /* закругления плашки */
+}
