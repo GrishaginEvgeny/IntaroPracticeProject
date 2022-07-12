@@ -8,20 +8,16 @@
         <a
                 class="img-fluid"
                 href="#"
-                style="height: 1050px"
                 alt="&#34;ANTIHYPE HOME&#34; COLLECTION"
-        ><img
-                    src="https://thumb.tildacdn.com/tild3464-3565-4135-b430-323565616130/-/format/webp/1H1A534545560-Edit_1.png"
-                    alt=""
-            /></a>
+        >
+            <div role="img" class="img-of-collections" style="background-image: url({{ asset('build/images/zamai.3db0391a.png') }});"></div>
+        </a>
 
         <a
                 class="img-fluid"
                 href="#"
-                style="height: 661px"
-                alt="	&#34;LIDA&#34; COLLECTION"
-        ><img src="https://ie.wampi.ru/2022/07/01/_1_1-1.png" alt=""
-            /></a>
+                alt="&#34;LIDA&#34; COLLECTION"
+        >            <div role="img" class="img-of-collections" style="background-image: url({{ asset('build/images/lida.86dfcd5c.webp') }});"></div> </a>
     </div>
     <div class="container">
             <p class="fs-3 text-center pt-3 pb-3">Случайная подборка</p>
@@ -42,5 +38,8 @@
                 {% endfor %}
             </div>
     </div>
+
+
+
     {% include 'base/footer.html.twig' %}
 {% endblock %}

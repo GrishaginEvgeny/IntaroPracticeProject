@@ -2,18 +2,26 @@
 
 namespace App\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Entity\User;
+use App\Entity\Product;
+use App\Entity\Section;
 use Symfony\Component\HttpFoundation\Response;
+use App\Controller\Admin\ProductCrudController;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        return parent::index();
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        $url=$adminUrlGenerator->setController(ProductCrudController::class)->generateUrl();
+        return $this->redirect($url);
+        // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -35,12 +43,19 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('IntaroPracticeProject Admin');
+            ->setTitle('Админ панель')
+            ->disableUrlSignatures();
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        return [
+            //MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+
+            MenuItem::section('Разделы'),
+            MenuItem::linkToCrud('Продукты | Products', 'fas fa-list', Product::class),
+            MenuItem::linkToCrud('Секции | Sections', 'fas fa-list', Section::class),
+            MenuItem::linkToCrud('Пользователи | Users', 'fas fa-list', User::class),
+        ];
     }
 }

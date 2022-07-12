@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="symfony@localhost" uuid="7188b8b9-69bc-47e2-8eb8-e94e6dbefccb">
+    <data-source source="LOCAL" name="symfony2@localhost" uuid="4c360fc8-b402-42b8-8b4b-47f323d1531b">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/symfony</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/symfony2</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

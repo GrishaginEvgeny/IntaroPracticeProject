@@ -4,7 +4,7 @@
 
 {% block body %}
     {% include 'base/header.html.twig' with {header} %}
-    <div class="container">
+    <div class="container mt-3">
         <p class="fs-4 text-left pt-0 pb-0 text-uppercase">
             {{ parentSections|last.name }}
         </p>
@@ -21,13 +21,11 @@
         </p>
         <div class="wrapper">
             {% for item in products %}
-            <div class="photo collection-wrapper bg-image hover-zoom">
-                <a href="{{ path('app_product', {'id': item.id}) }}" class="bg-image hover-zoom">
-                    <img
-                            class="collection-img"
-                            src="{{ asset('upload/pictures/' ~ item.picture) }}"
-                            alt=""
-                    />
+            <div class="photo">
+                <a href="{{ path('app_product', {'id': item.id}) }}">
+                    <div
+                                    class="home-collection-img"
+                                    style="background-image: url('{{ asset('upload/pictures/' ~ item.picture) }}');"></div>
                     <div class="photo-text name" data-toggle="tooltip"
                          title="{{ item.name }}">{{ item.name }}</div>
                     <div class="photo-text price" data-toggle="tooltip"
@@ -37,5 +35,34 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if hasPreviousPage == true %}
+                    <li class="page-item">
+                        <a href="/section/{{ parentSections|last.id }}?page={{ currentPage - 1 }}" class="btn btn-bd-pagination me-3">Назад</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="/section/{{ parentSections|last.id }}?page=1" class="btn btn-bd-pagination me-3">1</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="btn btn-bd-pagination me-3 disabled">Назад</a>
+                    </li>
+                {% endif %}
+                {% if hasNextPage == true %}
+                    <li class="page-item">
+                        <a href="/section/{{ parentSections|last.id }}?page={{ currentPage + 1 }}" class="btn btn-bd-pagination">Далее</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="btn btn-bd-pagination disabled">Далее</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
     {% include 'base/footer.html.twig' %}
 {% endblock %}

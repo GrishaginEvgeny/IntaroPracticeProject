@@ -2,13 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\Id;
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Id;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use RetailCrm\Api\Factory\SimpleClientFactory;
+use RetailCrm\Api\Interfaces\ApiExceptionInterface;
+use RetailCrm\Api\Model\Filter\Users\ApiUserFilter;
+use RetailCrm\Api\Model\Request\Users\UsersRequest;
+use RetailCrm\Api\Interfaces\ClientExceptionInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
+use RetailCrm\Api\Model\Filter\Customers\CustomerFilter;
+use RetailCrm\Api\Model\Request\Customers\CustomersRequest;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -64,6 +71,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
+    
+
+    public function isCrmAdmin($client, $email)
+    {
+        $usersRequest = new UsersRequest();
+        $usersRequest->filter = new ApiUserFilter();
+        $usersRequest->filter->email = $email;
+        try {
+            $usersResponse = $client->users->list($usersRequest);
+            if (0 === count($usersResponse->users)) return false;
+            else return true;
+        } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
+            echo $exception;
+            exit(-1);
+        }
+    }
+
+    public function isCrmUser($client, $email)
+    {
+        $customersRequest = new CustomersRequest();
+        $customersRequest->filter = new CustomerFilter();
+        $customersRequest->filter->email = $email;
+        try {
+            $customersResponse = $client->customers->list($customersRequest);
+            if (0 === count($customersResponse->customers)) return false;
+            else return true;
+        } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
+            echo $exception;
+            exit(-1);
+        }
+    }
+
     /**
      * @see UserInterface
      */
@@ -71,6 +110,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
+        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $_ENV['RETAIL_CRM_API_KEY']);
+        if (self::isCrmAdmin($client, $this->email)) {
+            $roles[] = 'ROLE_ADMIN';
+        }
         return array_unique($roles);
     }
 
