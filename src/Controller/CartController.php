@@ -36,8 +36,10 @@ class CartController extends AbstractController
             );
             $totalPrice=0;
             //сразу считаем итоговую стоимость
-            foreach ($offers as $offer){
-                $totalPrice+=$offer->getOfferId()->getPrice()*$offer->getCount();
+            if($offers) {
+                foreach ($offers as $offer) {
+                    $totalPrice += $offer->getOfferId()->getPrice() * $offer->getCount();
+                }
             }
             return $this->render('cart/index.html.twig', [
                 'offers' => $offers,
