@@ -19,7 +19,7 @@ class XmlGenerator
         $xml_file_name = 'CRM.xml';
 
         $ymlCatalog = $dom->createElement('yml_catalog');
-        $dateAttr = new DOMAttr('date', date("Y-m-d H-i"));
+        $dateAttr = new DOMAttr('date', date("Y-m-d H:i:s"));
         $ymlCatalog->setAttributeNode($dateAttr);
 
         $shop = $dom->createElement('shop');
@@ -56,7 +56,7 @@ class XmlGenerator
             $shopOffer->setAttributeNode($productIdAttr);
             $shopOffer->setAttributeNode($quantityAttr);
 
-            $url = $dom->createElement('url', 'http://antihype-lstu.com/product/'.$offer->getProduct()->getId());
+            $url = $dom->createElement('url', 'http://c2179.test.chosten.com/product/'.$offer->getProduct()->getId());
             $shopOffer->appendChild($url);
 
             $price = $dom->createElement('price', $offer->getPrice());
@@ -66,7 +66,7 @@ class XmlGenerator
             $shopOffer->appendChild($categoryId);
 
             if ($offer->getPicture() != null) {
-                $picture = $dom->createElement('picture', "http://c2179.test.chosten.com/" . $offer->getPicture());
+                $picture = $dom->createElement('picture', "http://c2179.test.chosten.com/public/upload/" . $offer->getPicture());
                 $shopOffer->appendChild($picture);
             }
 
