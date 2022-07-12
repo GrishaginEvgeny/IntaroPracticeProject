@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
@@ -55,5 +56,18 @@ class OfferRepository extends ServiceEntityRepository
         $connect = $this->getEntityManager()->getConnection();
         $stmt = $connect->prepare($sql);
         return $stmt->executeQuery(['limit' => $limit])->fetchAllAssociative();
+    }
+    /**
+     * @throws Exception
+     * название картинки по названию продукта
+     */
+    public function getPicture(string $name): string
+    {
+        $sql = 'SELECT picture FROM offer WHERE name = :name LIMIT 1';
+
+        $connect = $this->getEntityManager()->getConnection();
+        $stmt = $connect->prepare($sql);
+        $value = $stmt->executeQuery(['name' => $name])->fetchAllAssociative();
+        return $value[0]["picture"];
     }
 }

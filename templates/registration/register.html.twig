@@ -42,9 +42,9 @@
                                             Выберите пол
                                             {{ form_widget(registrationForm.sex, {'attr': {'class': 'd-flex justify-content-between'},}) }}
                                         </div>
+                                        {{ form_rest(registrationForm) }}
                                         <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>
                                         <a href="{{ path('app_home') }}" class="btn my-4 header-nav-site text-decoration-none text-dark text-uppercase">Вернуться назад</a>
-                                        {{ form_rest(registrationForm) }}
                                     {{ form_end(registrationForm) }}
                                 </div>
                             </div>
@@ -54,5 +54,4 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

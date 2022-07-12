@@ -1,31 +1,24 @@
 <?php
 
 namespace App\Controller;
+
+use App\Entity\Offer;
 use App\Entity\OrderLk;
 use App\Entity\ItemLk;
 use App\Entity\Section;
 use Doctrine\Persistence\ManagerRegistry;
-use RetailCrm\Api\Exception\Client\BuilderException;
 use RetailCrm\Api\Factory\SimpleClientFactory;
 use RetailCrm\Api\Interfaces\ApiExceptionInterface;
 use RetailCrm\Api\Interfaces\ClientExceptionInterface;
-use RetailCrm\Api\Model\Callback\Response\Payments\Item;
-use RetailCrm\Api\Model\Filter\Customers\CustomerFilter;
 use RetailCrm\Api\Model\Filter\Orders\OrderFilter;
-use RetailCrm\Api\Model\Filter\Users\ApiUserFilter;
-use RetailCrm\Api\Model\Request\Customers\CustomersRequest;
 use RetailCrm\Api\Model\Request\Orders\OrdersRequest;
-use RetailCrm\Api\Model\Request\Users\UsersRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LkController extends AbstractController
+class HistoryController extends AbstractController
 {
-    /**
-     * @throws BuilderException
-     */
-    #[Route('/lk', name: 'app_lk')]
+    #[Route('/lk/history', name: 'app_history')]
     public function index(ManagerRegistry $doctrine): Response
     {
 
@@ -36,26 +29,6 @@ class LkController extends AbstractController
         $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
 
         $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
-
-
-        $customersRequest = new CustomersRequest();
-        $customersRequest->filter = new CustomerFilter();
-        $customersRequest->filter->email = $mail;
-        try {
-            $customersResponse = $client->customers->list($customersRequest);
-        } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception;
-            die();
-        }
-        //Авторизованный пользователь с данными из Апи Retail
-        $customerLk = $customersResponse->customers;
-        if (isset($customerLk[0]->{'address'}->{'text'})){
-
-            $address =$customerLk[0]->{'address'}->{'text'};
-        }else{
-            $address ='не указан';
-        }
-
 
         $ordersRequest = new OrdersRequest();
         $ordersRequest->filter = new OrderFilter();
@@ -90,6 +63,8 @@ class LkController extends AbstractController
                     $colorItem =$ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['color'];
                 $itemTarget = new ItemLk();
                 $itemTarget->name = $ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'displayName'};
+                $itemTarget->picture = $doctrine->getRepository(Offer::class)->getPicture( $itemTarget->name);
+                //var_dump($doctrine->getRepository(Offer::class)->getPicture( $itemTarget->name));
                 $itemTarget->size = $sizeItem;
                 $itemTarget->color =$colorItem;
                 $itemTarget->summ = $ordersResponse->orders[$i]->{'items'}[$j]->{'initialPrice'};
@@ -98,18 +73,9 @@ class LkController extends AbstractController
             }
             array_push($orders, $orderTarget);
         }
-        return $this->render('lk/index.html.twig', [
-            'email' => $customerLk[0]->{'email'},
-            'number' => $customerLk[0]->{'phones'}[0]->{'number'},
-            'fName' => $customerLk[0]->{'firstName'},
-            'lName' => $customerLk[0]->{'lastName'},
-            'patronymic' => $customerLk[0]->{'patronymic'},
-            'birthday' => $customerLk[0]->{'birthday'},
-            'sex' => $customerLk[0]->{'presumableSex'},
-            'address' => $address,
+        return $this->render('lk/history.html.twig', [
             'orders' => $orders,
             'header' => $header,
         ]);
     }
-
 }

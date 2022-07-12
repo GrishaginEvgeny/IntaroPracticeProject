@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}История заказов{% endblock %}
+
+{% block body %}
+    {% include 'base/header.html.twig' with {header} %}
+
+    <div class="container" style="margin-bottom: 50px; ">
+        <div class="row lkBox">
+
+
+            <div class="col-2 lkHr ">
+                <div class="row lkPanel mt-5">
+                    <a href="/lk" style="text-decoration: none" class="lkBlock lkPanelButton" id="profile_submit">Профиль</a>
+                </div>
+                <div class="row lkPanel">
+                    <a href="/" style="text-decoration: none" class="lkBlock lkPanelButton" id="personal_data_submit">Главная</a>
+                </div>
+                <div class="row lkPanel">
+                    <a href="/cart" style="text-decoration: none" class="lkBlock lkPanelButton" id="orders_submit">Корзина</a>
+                </div>
+                <div class="row lkPanel">
+                    <a href="/lk/history" style="text-decoration: none" class="lkBlock lkPanelButton" id="orders_submit">История заказов</a>
+                </div>
+                <div class="row lkPanel mb-5">
+                    <a href="/logout" style="text-decoration: none" class="lkBlock lkPanelButton rounded-pill">Выход</a>
+                </div>
+            </div>
+
+            <div class="col-10 lkInfo" id="orders">
+                <div id="close" class="row" style="height: 600px;  overflow: auto; justify-content: center; margin: 6% 3%;">
+
+                    {% for order in orders %}
+
+                        <div >
+
+
+                            <div class="d-flex  mb-3 ">
+                                <div class="col 7">
+                                    <div class="d-flex justify-content-start">
+                                        <h6 class="text-white">{{ order.number }}</h6>
+                                        <h6 class="text-white"> - </h6>
+                                        <h6 class="text-white">{{ order.date|date('d.m.Y h:i:s') }}</h6>
+                                    </div>
+                                    <p><small class="text-muted">{{ order.status }}, {{ order.typePayment }}</small></p>
+                                </div>
+                                <div class="col-2">
+                                    <p class="text-white">{{ order.summ }} P</p>
+                                </div>
+                                <div class="col-3 d-flex">
+
+                                    <a class=" text-white m-auto" data-bs-toggle="collapse"
+                                       data-bs-target="#open{{ order.number }}" role="button" aria-expanded="false"
+                                       aria-controls="open{{ order.number }}" id="open_submit">ᐯ</a>
+                                </div>
+                            </div>
+
+                            {% for item in order.items %}
+                                <div class="collapse" id="open{{ order.number }}">
+
+                                    <div class="d-flex justify-content-start mb-3 border-top border-secondary pt-2">
+                                        <div class="col-4 me-2">
+                                            <img src="/upload/pictures/{{ item.picture }}"
+                                                 style="object-fit: cover; object-position: center; height: 110px; width: 90px">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="text-white">{{ item.name }} x {{ item.quantity }}</h6>
+                                            </div>
+                                            <p><small class="text-muted">цвет {{ item.color }},
+                                                    размер {{ item.size }}</small></p>
+                                            <p class="text-white">{{ item.summ }} P</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+
+                        </div>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    {% include 'base/footer.html.twig' %}
+{% endblock %}
