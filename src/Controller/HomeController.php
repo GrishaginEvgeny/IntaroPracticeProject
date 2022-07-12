@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Offer;
 use App\Entity\Section;
+use App\Services\XmlGenerator;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,8 @@ class HomeController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $limit = 8;
+
+        XmlGenerator::loadToXML($doctrine);
 
         $header = $doctrine
             ->getRepository(Section::class)
