@@ -19,6 +19,7 @@ class ProductController extends AbstractController
     #[Route('/product/{id}', name: 'app_product')]
     public function index(int $id, ManagerRegistry $doctrine): Response
     {
+        $sortClothesValues = ['XS'=>'0', 'S'=>'1', 'M'=>'2', 'L'=>'3', 'XL'=>'4'];
         $product = $doctrine->getRepository(Product::class)->findOneBy(['id' => $id]);
 
         if (!$product) {
@@ -49,14 +50,18 @@ class ProductController extends AbstractController
                     ];
                 }
             }
-            $offerInfo[$resultSet[$i]['o_id']] = [
+            $offerInfo[$i] = [
                 'o_id' => $resultSet[$i]['o_id'],
                 'price' => $resultSet[$i]['price'],
                 'picture' => $resultSet[$i]['picture'],
-                'settings' => $settings,
+                'settings' => $settings, 'sortByValue' => array_key_exists(2, $settings) ? $sortClothesValues[$settings[2]['value']] : 0,
             ];
             $i += count($settings);
         }
+
+        usort($offerInfo, [ProductController::class, "sortByValue"]);
+
+        $product->setVendor(str_replace('&quot;','"',$product->getVendor()));
 
         return $this->render('product/index.html.twig', [
             'header' => $header,
@@ -64,5 +69,10 @@ class ProductController extends AbstractController
             'sections' => $sections,
             'offerInfo' => $offerInfo,
         ]);
+    }
+
+    function sortByValue($a, $b): int
+    {
+       return $a['sortByValue'] <=> $b['sortByValue'];
     }
 }

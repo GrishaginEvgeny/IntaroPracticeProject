@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220707184029 extends AbstractMigration
+final class Version20220710061200 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -38,7 +38,7 @@ final class Version20220707184029 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_DB649939549213EC ON property_value (property_id)');
         $this->addSql('CREATE TABLE section (id INT NOT NULL, parent_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, xml_id VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_2D737AEF727ACA70 ON section (parent_id)');
-        $this->addSql('CREATE TABLE shop_cart (id INT NOT NULL, offer_id_id INT NOT NULL, user_id INT NOT NULL, count INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE shop_cart (id INT NOT NULL, offer_id_id INT NOT NULL, count INT NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_CA516ECCFC69E3BE ON shop_cart (offer_id_id)');
         $this->addSql('CREATE TABLE "user" (id UUID NOT NULL, email VARCHAR(180) NOT NULL, password VARCHAR(180) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
