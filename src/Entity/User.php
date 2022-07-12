@@ -73,7 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     
 
-    public function getCrmUser($client, $email)
+    public function isCrmAdmin($client, $email)
     {
         $usersRequest = new UsersRequest();
         $usersRequest->filter = new ApiUserFilter();
@@ -88,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
 
-    public function getCrmCustomer($client, $email)
+    public function isCrmUser($client, $email)
     {
         $customersRequest = new CustomersRequest();
         $customersRequest->filter = new CustomerFilter();
@@ -111,7 +111,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
         $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $_ENV['RETAIL_CRM_API_KEY']);
-        if (self::getCrmUser($client, $this->email)) {
+        if (self::isCrmAdmin($client, $this->email)) {
             $roles[] = 'ROLE_ADMIN';
         }
         return array_unique($roles);

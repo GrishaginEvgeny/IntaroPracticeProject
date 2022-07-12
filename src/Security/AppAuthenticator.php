@@ -47,36 +47,6 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $this->userRepository = $userRepository;
     }
 
-    public function getCrmUser($client, $email)
-    {
-        $usersRequest = new UsersRequest();
-        $usersRequest->filter = new ApiUserFilter();
-        $usersRequest->filter->email = $email;
-        try {
-            $usersResponse = $client->users->list($usersRequest);
-            if (0 === count($usersResponse->users)) return false;
-            else return true;
-        } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception;
-            exit(-1);
-        }
-    }
-
-    public function getCrmCustomer($client, $email)
-    {
-        $customersRequest = new CustomersRequest();
-        $customersRequest->filter = new CustomerFilter();
-        $customersRequest->filter->email = $email;
-        try {
-            $customersResponse = $client->customers->list($customersRequest);
-            if (0 === count($customersResponse->customers)) return false;
-            else return true;
-        } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception;
-            exit(-1);
-        }
-    }
-
     /**
      * @throws BuilderException
      */
