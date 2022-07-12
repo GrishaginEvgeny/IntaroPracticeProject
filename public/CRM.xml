@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<yml_catalog date="720221"/>
+<yml_catalog date="720221">
 <shop>
-  <name>Khalifa</name>
+  <name>Khalif</name>
   <company>antihype LSTU</company>
   <categories>
     <category id="1">&#x41E;&#x431;&#x443;&#x432;&#x44C;</category>
@@ -4381,3 +4381,4 @@
     </offer>
   </offers>
 </shop>
+</yml_catalog>
