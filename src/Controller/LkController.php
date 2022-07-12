@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use RetailCrm\Api\Exception\Client\BuilderException;
 use RetailCrm\Api\Factory\SimpleClientFactory;
 use RetailCrm\Api\Interfaces\ApiExceptionInterface;
 use RetailCrm\Api\Interfaces\ClientExceptionInterface;
@@ -15,18 +16,21 @@ use RetailCrm\Api\Model\Request\Users\UsersRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use function PHPUnit\Framework\isNull;
 
 class LkController extends AbstractController
 {
+    /**
+     * @throws BuilderException
+     */
     #[Route('/lk', name: 'app_lk')]
     public function index(): Response
     {
 
         $mail = 'nanana123@gmail.com';
-        $this->apiKey = $_ENV['RETAIL_CRM_API_KEY'];
+        //$mail = $this->getUser()->getUserIdentifier();
+        $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
 
-        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $this->apiKey);
+        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
 
 
         $customersRequest = new CustomersRequest();
@@ -113,7 +117,7 @@ class OrderLk {
     function __construct()
     {
         $this->typePayment = "не оплачено";
-        $this->staus = "не оплачено";
+        $this->status = "не оплачено";
     }
 }
 class ItemLk {

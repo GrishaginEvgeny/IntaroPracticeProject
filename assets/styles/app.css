@@ -183,6 +183,42 @@ ul li {
   margin-right: 5px;
   margin-top: 5px;
 }
+.color-text
+{
+  width: 60%;
+}
+
+.bag-round-button{
+  margin: 0;
+  width: 64px;
+  height: 64px;
+  font-size: 36px;
+  position: fixed;
+  top: 90%;
+  left: 92%;
+  background-color: white;
+  z-index: 1000;
+  transition: 300ms ease-in!important;
+}
+.bag-round-button-counter{
+  margin: 0;
+  width: 32px;
+  height: 32px;
+  position: fixed;
+  top: 90%;
+  left: calc(92% + 48px);
+  background-color: #404040!important;;
+  z-index: 1001;
+}
+
+.bag-round-button:hover {
+    background-color: #404040!important;;
+}
+
+.bag-round-button:hover .bi-bag {
+  color: white;
+}
+
 .btg-bag {
   width: 300px;
   transition-duration: 0.2s;

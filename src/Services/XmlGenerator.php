@@ -26,7 +26,7 @@ class XmlGenerator
 
         $shop = $dom->createElement('shop');
 
-        $shopName = $dom->createElement('name', "Khalifa");
+        $shopName = $dom->createElement('name', "Khalif");
         $shop->appendChild($shopName);
 
         $shopCompany = $dom->createElement('company', 'antihype LSTU');

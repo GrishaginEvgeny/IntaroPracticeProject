@@ -43,10 +43,8 @@
                                             Выберите пол
                                             {{ form_widget(registrationForm.sex, {'attr': {'class': 'd-flex justify-content-between'},}) }}
                                         </div>
-                                        <div class="form-group mt-2 notactive">
-                                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': ''}}) }}
-                                        </div>
-                                        <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>                                    
+                                        <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>
+                                        <a href="{{ path('app_home') }}" class="btn my-4 header-nav-site text-decoration-none text-dark text-uppercase">Вернуться назад</a>
                                         </form>
                                     {{ form_end(registrationForm) }}
                                 </div>

@@ -10,14 +10,14 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="col">
-                        <a href="{{ path('app_home') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">административная панель</a>
+                        <a href="{{ path('app_admin') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">административная панель</a>
                     </li>
                 {% endif %}
                 <li class="col">
-                    <a href="{{ path('app_home') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">личный кабинет</a>
+                    <a href="{{ path('app_lk') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">личный кабинет</a>
                 </li>
                 <li class="col">
-                    <a href="{{ path('app_home') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">выйти</a>
+                    <a href="{{ path('app_logout') }}" class="header-nav-site text-decoration-none text-dark text-uppercase">выйти</a>
                 </li>
             {% else %}
             <li class="col">
@@ -69,4 +69,18 @@
             {% endfor %}
         </ul>
     </div>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <a href="{{ path('app_lk') }}">
+        <div style="cursor: pointer">
+            <div class="rounded-circle d-flex justify-content-center align-items-center bag-round-button-counter">
+                <div class="counter-text" style="font-size: 16px">
+                    0
+                </div>
+            </div>
+            <div class="rounded-circle d-flex justify-content-center align-items-center bag-round-button">
+                <i class="bi bi-bag"></i>
+            </div>
+        </div>
+    </a>
+    {% endif %}
 </header>

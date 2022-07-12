@@ -27,5 +27,7 @@ import '@fontsource/montserrat-alternates/700.css';
 import '@fontsource/montserrat-alternates/800.css';
 import '@fontsource/montserrat-alternates/900.css';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 // start the Stimulus application
 import './bootstrap';

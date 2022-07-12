@@ -20,6 +20,7 @@
     "prettier": "prettier"
   },
   "dependencies": {
-    "@fontsource/montserrat-alternates": "^4.5.9"
+    "@fontsource/montserrat-alternates": "^4.5.9",
+    "bootstrap-icons": "^1.8.3"
   }
 }

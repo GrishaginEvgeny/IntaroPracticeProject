@@ -54,8 +54,7 @@ class ProductController extends AbstractController
                 'o_id' => $resultSet[$i]['o_id'],
                 'price' => $resultSet[$i]['price'],
                 'picture' => $resultSet[$i]['picture'],
-                'settings' => $settings,
-                'sortByValue' => $sortClothesValues[$settings[2]['value']],
+                'settings' => $settings, 'sortByValue' => array_key_exists(2, $settings) ? $sortClothesValues[$settings[2]['value']] : 0,
             ];
             $i += count($settings);
         }
