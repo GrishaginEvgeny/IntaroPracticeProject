@@ -93,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $customersRequest = new CustomersRequest();
         $customersRequest->filter = new CustomerFilter();
         $customersRequest->filter->email = $email;
+        $customersRequest->filter->sites[] = 'khalif';
         try {
             $customersResponse = $client->customers->list($customersRequest);
             if (0 === count($customersResponse->customers)) return false;
