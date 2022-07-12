@@ -27,7 +27,7 @@ class CartController extends AbstractController
         $header = $doctrine
             ->getRepository(Section::class)
             ->getHeaderSections();
-        $user=$this->getUser();
+        $user = $this->getUser();
         if ($user) {
             //выводим все товары юзера
             $offers = $cartRepository->findBy(
@@ -61,7 +61,7 @@ class CartController extends AbstractController
     #[Route('/product/{id}/to_cart', name: 'add_to_cart')]
     public function addToCart(Offer $offer, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         if($user){
             $product = $cartRepository->findOneBy([
                 'email' => $user->getUserIdentifier(),
@@ -94,7 +94,7 @@ class CartController extends AbstractController
     #[Route('/cart/minus/{id}', name: 'delete_from_cart')]
     public function deleteFromCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         $product = $cartRepository->findOneBy([
             'email' => $user->getUserIdentifier(),
             'offer_id' => $offers->getId(),
@@ -120,7 +120,7 @@ class CartController extends AbstractController
     #[Route('/cart/plus/{id}', name: 'add_count_cart')]
     public function addCountCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         $product = $cartRepository->findOneBy([
             'email' => $user->getUserIdentifier(),
             'offer_id' => $offers->getId(),
@@ -129,5 +129,27 @@ class CartController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
         return $this->redirectToRoute('cart');
+    }
+
+    /**
+     * @param ShopCartRepository $cartRepository
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    #[Route('/cart/makeOrder', name: 'make_order')]
+    public function makeOrder(ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if($user){
+            $products = $cartRepository->findBy([
+               'email' => $user->getUserIdentifier(),
+            ]);
+            foreach ($products as $product){
+                $entityManager->remove($product);
+                $entityManager->flush();
+            }
+            return $this->redirectToRoute('cart');
+        }
+        return $this->redirectToRoute('app_home');
     }
 }
