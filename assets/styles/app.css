@@ -183,12 +183,11 @@ ul li {
   margin-right: 5px;
   margin-top: 5px;
 }
-.color-text
-{
+.color-text {
   width: 60%;
 }
 
-.bag-round-button{
+.bag-round-button {
   margin: 0;
   width: 64px;
   height: 64px;
@@ -198,21 +197,21 @@ ul li {
   left: 92%;
   background-color: white;
   z-index: 1000;
-  transition: 300ms ease-in!important;
+  transition: 300ms ease-in !important;
 }
-.bag-round-button-counter{
+.bag-round-button-counter {
   margin: 0;
   width: 32px;
   height: 32px;
   position: fixed;
   top: 90%;
   left: calc(92% + 48px);
-  background-color: #404040!important;;
+  background-color: #404040 !important;
   z-index: 1001;
 }
 
 .bag-round-button:hover {
-    background-color: #404040!important;;
+  background-color: #404040 !important;
 }
 
 .bag-round-button:hover .bi-bag {
@@ -535,4 +534,70 @@ h6 span {
 
 .notactive {
   display: none !important;
+}
+
+.section {
+  padding-left: 50px;
+}
+.section input[name='group'] {
+  display: none;
+}
+.radio-container {
+  margin-bottom: 10px;
+}
+.radio-container label {
+  position: relative;
+}
+
+.radio-container span::before,
+.radio-container span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.radio-container span.radio:hover {
+  cursor: pointer;
+}
+.radio-container span.radio::before {
+  left: -52px;
+  width: 45px;
+  height: 25px;
+  background-color: #a8aac1;
+  border-radius: 50px;
+}
+.radio-container span.radio::after {
+  left: -49px;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background-color: #6c788a;
+  transition: left 0.25s, background-color 0.25s;
+}
+input[type='radio']:checked + label span.radio::after {
+  left: -27px;
+  background-color: white;
+}
+
+.radio-container span.checkbox::before {
+  width: 27px;
+  height: 27px;
+  background-color: #fff;
+  left: -35px;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+.radio-container span.checkbox:hover::before {
+  border: 3px solid #f0ff76;
+}
+.radio-container span.checkbox::after {
+  content: '\f00c';
+  font-family: 'FontAwesome';
+  left: -31px;
+  top: 2px;
+  color: transparent;
+  transition: color 0.2s;
 }

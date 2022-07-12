@@ -57,14 +57,16 @@
                     {% set arrayForCompareColors = [] %}
                     {% for offer in offerInfo %}
                         {% if offer.settings[1].value not in arrayForCompareColors %}
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                    <input class="form-check-input mt-0" type="radio" value="{{ offer.settings[1].value }}" name="color" id="color-{{ loop.index }}">
+                        <div class="input-group">
+                            <section class="section">
+                                <div class="input-group">
+                                    <div class="radio-container">
+                                        <input type="radio" name="group" id="color-{{ loop.index }}">
+                                        <label for="color-{{ loop.index }}"><span class="radio">{{ offer.settings[1].value }}</span></label>
+                                      </div>
                                 </div>
-                                <div class="input-group-text color-text">
-                                    {{ offer.settings[1].value }}
-                                </div>
-                            </div>
+                            </section>
+                        </div>
                             {% set arrayForCompareColors = arrayForCompareColors|merge([offer.settings[1].value]) %}
                         {% endif %}
                     {% endfor %}
