@@ -66,7 +66,7 @@ class XmlGenerator
             $shopOffer->appendChild($categoryId);
 
             if ($offer->getPicture() != null) {
-                $picture = $dom->createElement('picture', "http://c2179.test.chosten.com/public/upload/" . $offer->getPicture());
+                $picture = $dom->createElement('picture', "http://c2179.test.chosten.com/upload/pictures/" . $offer->getPicture());
                 $shopOffer->appendChild($picture);
             }
 
