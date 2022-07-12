@@ -61,6 +61,7 @@ class ProductController extends AbstractController
 
         usort($offerInfo, [ProductController::class, "sortByValue"]);
 
+        $product->setVendor(str_replace('&quot;','"',$product->getVendor()));
 
         return $this->render('product/index.html.twig', [
             'header' => $header,
