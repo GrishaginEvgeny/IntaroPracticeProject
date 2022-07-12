@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\Section;
 use App\Entity\ShopCart;
 use App\Repository\ShopCartRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,8 +22,11 @@ class CartController extends AbstractController
      * @return Response
      */
     #[Route('/cart', name: 'cart')]
-    public function index(ShopCartRepository $cartRepository): Response
+    public function index(ShopCartRepository $cartRepository, ManagerRegistry $doctrine): Response
     {
+        $header = $doctrine
+            ->getRepository(Section::class)
+            ->getHeaderSections();
         $user=$this->getUser();
         if ($user) {
             //выводим все товары юзера
@@ -37,6 +42,7 @@ class CartController extends AbstractController
             return $this->render('cart/index.html.twig', [
                 'offers' => $offers,
                 'totalPrice' => $totalPrice,
+                'header' => $header,
             ]);
         }
         else return $this->redirectToRoute('app_login');

@@ -3,32 +3,112 @@
 {% block title %}Hello CartController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
+    {% include 'base/header.html.twig' with {header} %}
 <div class="example-wrapper">
-    <h1>Корзина</h1>
+    <div class="container" style="margin-bottom: 50px; ">
+        <div class="row lkBox">
 
-    Товары
-    {% for offer in offers %}
-        <ul>
-            <li>
-                <a href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
-                {{ offer.getOfferId().price }} рублей
-                {{ offer.getOfferId().picture }}
 
-                <div>
-                    <a href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
-                    {{ offer.count }}
-                    <a href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
+            <div class="col-2 lkHr ">
+                <div class="row lkPanel mt-5">
+                    <a href="/lk" style="text-decoration: none" class="lkBlock lkPanelButton" id="profile_submit">Профиль</a>
                 </div>
-                {{ offer.getOfferId().price * offer.count }}
-            </li>
-        </ul>
-    {% endfor %}
-    <div>Итоговая стоимость: {{ totalPrice }} <button>Оформить заказ</button></div>
+                <div class="row lkPanel">
+                    <a href="/" style="text-decoration: none" class="lkBlock lkPanelButton" id="personal_data_submit">Главная</a>
+                </div>
+                <div class="row lkPanel">
+                    <a href="/cart" style="text-decoration: none" class="lkBlock lkPanelButton" id="orders_submit">Корзина</a>
+                </div>
+                <div class="row lkPanel">
+                    <a href="/lk/history" style="text-decoration: none" class="lkBlock lkPanelButton" id="orders_submit">История заказов</a>
+                </div>
+                <div class="row lkPanel mb-5">
+                    <a href="/logout" style="text-decoration: none" class="lkBlock lkPanelButton rounded-pill">Выход</a>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="col-10 lkInfo" id="basket">
+                <div id="close" class="row" style="height: 600px; overflow: auto; justify-content: center; justify-content: center; margin: 6% 3%;">
+                    <div  class="col-lg-6 col-md-12 pe-3">
+
+
+                        {% for offer in offers %}
+                            <div class="d-flex justify-content-start mb-3">
+                                <div class="col-4 me-2">
+                                    <img src="/upload/pictures/{{ offer.getOfferId().picture }}" style="object-fit: cover; object-position: center; height: 110px; width: 90px">
+                                </div>
+                                <div class="col-8">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="text-white">
+                                            <a style="text-decoration: none; color: white;" href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
+                                        </h6>
+
+                                    </div>
+{#                                    <p ><small class="text-muted">цвет синий, размер 46</small></p>#}
+                                    <div class="d-flex justify-content-between">
+                                        <p class="text-white"> Кол-во: {{ offer.count }} </p>
+                                        <div>
+                                            <a style=" text-decoration: none; color: white;" href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
+                                            {{ offer.count }}
+                                            <a style=" text-decoration: none; color: white;" href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
+                                        </div>
+
+                                        <p class="text-white">{{ offer.getOfferId().price * offer.count }} P</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% for offer in offers %}
+                            <div class="d-flex justify-content-start mb-3">
+                                <div class="col-4 me-2">
+                                    <img src="/upload/pictures/{{ offer.getOfferId().picture }}" style="object-fit: cover; object-position: center; height: 110px; width: 90px">
+                                </div>
+                                <div class="col-8">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="text-white">
+                                            <a style="text-decoration: none; color: white;" href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
+                                        </h6>
+
+                                    </div>
+                                    {#                                    <p ><small class="text-muted">цвет синий, размер 46</small></p>#}
+                                    <div class="d-flex justify-content-between">
+                                        <p class="text-white"> Кол-во: {{ offer.count }} </p>
+                                        <div>
+                                            <a style=" text-decoration: none; color: white;" href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
+                                            {{ offer.count }}
+                                            <a style=" text-decoration: none; color: white;" href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
+                                        </div>
+
+                                        <p class="text-white">{{ offer.getOfferId().price * offer.count }} P</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+
+
+
+
+                    </div>
+                    <div class="col-lg-6 col-md-12 mt-md-5 mt-lg-0 ps-3">
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <p class="text-uppercase text-white">Всего</p>
+                            <p class="text-uppercase text-white"> {{ totalPrice }} Р</p>
+                        </div>
+                            <button class="w-100 btn btn-light btn-lg"  >Подтвердить заказ</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% include 'base/footer.html.twig' %}
 </div>
 {% endblock %}
