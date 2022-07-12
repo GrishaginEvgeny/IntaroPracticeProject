@@ -22,8 +22,6 @@ class HomeController extends AbstractController
     {
         $limit = 8;
 
-        XmlGenerator::loadToXML($doctrine);
-
         $header = $doctrine
             ->getRepository(Section::class)
             ->getHeaderSections();
