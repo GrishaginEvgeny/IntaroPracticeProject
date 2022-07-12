@@ -36,7 +36,7 @@
                     {% endfor %}
                 </p>
                 <p class="fs-3 text-left pt-0 pb-0 mt-1 fw-bolder">
-                    5 290 ₽
+                    {{ offerInfo[0].price~' ₽' }}
                 <p class="fs-6 text-left pt-0 pb-0">
                 {% set arrayForCompareSize = [] %}
                 {% for offer in offerInfo %}
