@@ -35,34 +35,6 @@
             <div class="col-10 lkInfo" id="basket">
                 <div id="close" class="row" style="height: 600px; overflow: auto; justify-content: center; justify-content: center; margin: 6% 3%;">
                     <div  class="col-lg-6 col-md-12 pe-3">
-
-
-                        {% for offer in offers %}
-                            <div class="d-flex justify-content-start mb-3">
-                                <div class="col-4 me-2">
-                                    <img src="/upload/pictures/{{ offer.getOfferId().picture }}" style="object-fit: cover; object-position: center; height: 110px; width: 90px">
-                                </div>
-                                <div class="col-8">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="text-white">
-                                            <a style="text-decoration: none; color: white;" href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
-                                        </h6>
-
-                                    </div>
-{#                                    <p ><small class="text-muted">цвет синий, размер 46</small></p>#}
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-white"> Кол-во: {{ offer.count }} </p>
-                                        <div>
-                                            <a style=" text-decoration: none; color: white;" href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
-                                            {{ offer.count }}
-                                            <a style=" text-decoration: none; color: white;" href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
-                                        </div>
-
-                                        <p class="text-white">{{ offer.getOfferId().price * offer.count }} P</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
                         {% for offer in offers %}
                             <div class="d-flex justify-content-start mb-3">
                                 <div class="col-4 me-2">
