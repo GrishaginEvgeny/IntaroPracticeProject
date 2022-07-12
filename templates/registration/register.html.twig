@@ -14,7 +14,6 @@
                             <div class="card-front">
                                 <div class="center-wrap">
                                     {{ form_start(registrationForm) }}
-                                    <form method="post" class="section text-center">
                                         <h4 class="mb-4 pb-3">Регистрация</h4>
                                         
                                         <div class="form-group mt-2">
@@ -45,7 +44,7 @@
                                         </div>
                                         <button type="submit" class="btn mt-4 mb-4 header-nav-site text-decoration-none text-dark text-uppercase">Зарегистрироваться</button>
                                         <a href="{{ path('app_home') }}" class="btn my-4 header-nav-site text-decoration-none text-dark text-uppercase">Вернуться назад</a>
-                                        </form>
+                                        {{ form_rest(registrationForm) }}
                                     {{ form_end(registrationForm) }}
                                 </div>
                             </div>
