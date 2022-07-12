@@ -4,9 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Offer;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class OfferCrudController extends AbstractCrudController
 {
@@ -22,6 +23,9 @@ class OfferCrudController extends AbstractCrudController
             MoneyField::new('price')->setCurrency("RUB"),
             IntegerField::new('quantity'),
             TextField::new('unit'),
+            ImageField::new('picture')
+                ->setBasePath('upload/pictures/')
+                ->setUploadDir('public/upload/pictures/')
         ];
     }
 }

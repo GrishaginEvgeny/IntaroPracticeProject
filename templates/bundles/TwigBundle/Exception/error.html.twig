@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Что-то пошло не так Т_Т{% endblock %}
+
+{% block body %}
+
+<section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Что-то пошло не так</h1>
+          <p class="lead text-muted"> Попробуйте позже или обратитесь к администратору </p>
+          <p>
+            <a href={{ path('app_home') }} class="btn btn-secondary my-2">На главную</a>
+            <a href="https://vk.com/eugenethehunter" class="btn btn-secondary my-2">Задать вопрос</a>
+          </p>
+    </section>
+      
+{% endblock %}
