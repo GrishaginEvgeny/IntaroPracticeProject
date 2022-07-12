@@ -47,8 +47,6 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            echo $user->getId();
-
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -59,7 +57,8 @@ class RegistrationController extends AbstractController
             $request = new CustomersCreateRequest();
             $request->customer = new Customer();
             
-            $request->site = 'practice-2022';
+
+            $request->site = 'khalif';
             $request->customer->externalId = (string)$user->getId();
             $request->customer->email = $form->get('email')->getData();
             $request->customer->firstName = $form->get('firstname')->getData();
