@@ -56,7 +56,7 @@ class Offer
     private $product;
 
     /**
-     * @ORM\OneToMany(targetEntity=PropertyValue::class, mappedBy="offer", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=PropertyValue::class, mappedBy="offer", orphanRemoval=true, cascade={"persist"})
      */
     private $propertyValues;
 

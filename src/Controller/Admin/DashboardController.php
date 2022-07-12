@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Offer;
 use App\Entity\Product;
 use App\Entity\Section;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,9 +52,10 @@ class DashboardController extends AbstractDashboardController
     {
         return [
             //MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-
+            MenuItem::linkToRoute('На главную', 'fas fa-home', 'app_home'),
             MenuItem::section('Разделы'),
             MenuItem::linkToCrud('Продукты | Products', 'fas fa-list', Product::class),
+            MenuItem::linkToCrud('Предложения | Offers', 'fas fa-list', Offer::class),
             MenuItem::linkToCrud('Секции | Sections', 'fas fa-list', Section::class),
             MenuItem::linkToCrud('Пользователи | Users', 'fas fa-list', User::class),
         ];
