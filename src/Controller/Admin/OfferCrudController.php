@@ -53,11 +53,10 @@ class OfferCrudController extends AbstractCrudController
         yield MoneyField::new('price')->setCurrency("RUB");
         yield IntegerField::new('quantity');
         yield TextField::new('unit');
-        if (Crud::PAGE_EDIT === $pageName || Crud::PAGE_DETAIL === $pageName) {
-            yield ImageField::new('picture')
-        // ->setBasePath('uploads/pictures')
-        ->setUploadDir('\public\upload\pictures');
-        }
+        yield ImageField::new('picture')            
+            ->setBasePath('upload/pictures')
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
+            ->setUploadDir('upload/pictures');
         if (Crud::PAGE_EDIT === $pageName){
             yield AssociationField::new('product');
         }
