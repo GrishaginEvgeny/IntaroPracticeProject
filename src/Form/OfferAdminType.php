@@ -3,14 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Offer;
+use App\Repository\OfferRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class OfferAdminType extends AbstractType
-{
+{     
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -21,7 +24,7 @@ class OfferAdminType extends AbstractType
             ->add('active')
             ->add('picture', FileType::class, [
                 'label' => 'Картинка',
-                'attr' => array('class' => 'class="form-control'),
+                'attr' => array('class' => 'form-control'),
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -34,7 +37,6 @@ class OfferAdminType extends AbstractType
                     ])
                 ],
             ])
-            ->add('product')
         ;
     }
 

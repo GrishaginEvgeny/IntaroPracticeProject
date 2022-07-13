@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\Section;
 use App\Entity\ShopCart;
 use App\Repository\ShopCartRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use RetailCrm\Api\Factory\SimpleClientFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,23 +23,63 @@ class CartController extends AbstractController
      * @return Response
      */
     #[Route('/cart', name: 'cart')]
-    public function index(ShopCartRepository $cartRepository): Response
+    public function index(ShopCartRepository $cartRepository, ManagerRegistry $doctrine): Response
     {
         $user=$this->getUser();
         if ($user) {
+            $header = $doctrine
+                ->getRepository(Section::class)
+                ->getHeaderSections();
             //выводим все товары юзера
             $offers = $cartRepository->findBy(
                 ['email' => $user->getUserIdentifier()],
                 ['id' => 'ASC']
             );
             $totalPrice=0;
+            $arrayedOffers=[];
             //сразу считаем итоговую стоимость
             foreach ($offers as $offer){
+                $offerProperty = $offer->getOfferId()->getPropertyValues();
+                $properties = [];
+                foreach ($offerProperty as $property){
+                    $properties[$property->getProperty()->getCode()] = $property->getValue();
+                }
+                unset($property);
+                $arrayedOffers[] = [
+                    'count' => $offer->getCount(),
+                    'offer_id' => $offer->getOfferId()->getId(),
+                    'price' => $offer-> getOfferId()->getPrice(),
+                    'picture' => $offer->getOfferId()->getPicture(),
+                    'name' => $offer->getOfferId()->getName(),
+                    'product_id' => $offer->getOfferId()->getProduct()->getId(),
+                    'properties' => $properties,
+                ];
                 $totalPrice+=$offer->getOfferId()->getPrice()*$offer->getCount();
             }
+            $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
+
+            $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
+            $deliveryTypesCrm = $client->references->deliveryTypes()->deliveryTypes;
+            $typeKey =  array_keys($deliveryTypesCrm);
+            $deliveryTypesLk = [];
+            foreach ( $typeKey as $type) {
+                $deliveryTypesLk[] = $deliveryTypesCrm[$type]->{'name'};
+            }
+
+            $paymentTypesCrm = $client->references->paymentTypes()->paymentTypes;
+            $typeKey =  array_keys($paymentTypesCrm);
+            $paymentTypesLk = [];
+            foreach ( $typeKey as $type) {
+                $paymentTypesLk[] = $paymentTypesCrm[$type]->{'name'};
+            }
+            //dd($arrayedOffers);
+
             return $this->render('cart/index.html.twig', [
-                'offers' => $offers,
+                'offers' => $arrayedOffers,
                 'totalPrice' => $totalPrice,
+                'header' => $header,
+                'deliveryTypes' => $deliveryTypesLk,
+                'paymentTypes' => $paymentTypesLk,
             ]);
         }
         else return $this->redirectToRoute('app_login');

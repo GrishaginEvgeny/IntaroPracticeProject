@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+    {% include 'base/header.html.twig' with {header} %}
+    <div class="example-wrapper">
+        <div class="container" style="margin-bottom: 50px; ">
+            <label>Спасибо за заказ!</label>
+            <label class="btn-success btn">Номер заказа: {{ id }}</label>
+            <label class="btn-secondary btn">Сумма заказа: {{ sum }}</label>
+            <div class="row lkBox">
+                <div class="col-10 lkInfo" id="basket">
+                    <div id="close" class="row"
+                         style="height: 600px; overflow: auto; justify-content: center; justify-content: center; margin: 6% 3%;">
+                        <div class="col-lg-6 col-md-12 pe-3">
+                            {% for offer in offers %}
+                                <div class="d-flex justify-content-start mb-3">
+                                    <div class="col-4 me-2">
+                                        <img src="/upload/pictures/{{ offer.picture }}"
+                                             style="object-fit: cover; object-position: center; height: 110px; width: 90px">
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="text-black">
+                                                <a style="text-decoration: none; color: white;"
+                                                   href="/product/{{ offer.product.id }}">{{ offer.name }}</a>
+                                            </h6>
+                                        </div>
+                                        <p ><small class="text-muted">{% if 'color' in offer.propertyValues|keys %} {{ 'Цвет: '~offer.propertyValues.color }} {% else %} Цвет не указан {% endif %}, {% if 'size' in offer.propertyValues|keys %} {{  'Размер: '~offer.propertyValues.size }} {% else %} Размер не указан {% endif %}</small></p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'base/footer.html.twig' %}
+    </div>
+{% endblock %}

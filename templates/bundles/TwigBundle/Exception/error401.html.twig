@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Что-то пошло не так Т_Т{% endblock %}
+
+{% block body %}
+
+<section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">401</h1>
+          <p class="lead text-muted"> Требуется авторизация <br>  </p>
+          <p>
+            <a href={{ path('app_register') }} class="btn btn-primary my-2">Регистрация</a>
+            <a href={{ path('app_login') }} class="btn btn-primary my-2">Вход</a>
+            <a href={{ path('app_home') }} class="btn btn-secondary my-2">На главную</a>
+            <a href="https://vk.com/eugenethehunter" class="btn btn-secondary my-2">Задать вопрос</a>
+          </p>
+    </section>
+      
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Offer;
 use App\Entity\Product;
 use App\Entity\Section;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,11 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -51,9 +56,10 @@ class DashboardController extends AbstractDashboardController
     {
         return [
             //MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-
+            MenuItem::linkToRoute('На главную', 'fas fa-home', 'app_home'),
             MenuItem::section('Разделы'),
             MenuItem::linkToCrud('Продукты | Products', 'fas fa-list', Product::class),
+            MenuItem::linkToCrud('Предложения | Offers', 'fas fa-list', Offer::class),
             MenuItem::linkToCrud('Секции | Sections', 'fas fa-list', Section::class),
             MenuItem::linkToCrud('Пользователи | Users', 'fas fa-list', User::class),
         ];
