@@ -7,8 +7,6 @@
 
     <div class="container" style="margin-bottom: 50px; ">
         <div class="row lkBox">
-
-
             <div class="col-2 lkHr ">
                 <div class="row lkPanel mt-5">
                     <a href="/lk" style="text-decoration: none" class="lkBlock lkPanelButton" id="profile_submit">Профиль</a>
@@ -20,7 +18,8 @@
                     <a href="/cart" style="text-decoration: none" class="lkBlock lkPanelButton" id="orders_submit">Корзина</a>
                 </div>
                 <div class="row lkPanel">
-                    <a href="/lk/history" style="text-decoration: none" class="lkBlock lkPanelButton" id="orders_submit">История заказов</a>
+                    <a href="/lk/history" style="text-decoration: none" class="lkBlock lkPanelButton lkActive"
+                       id="orders_submit">История заказов</a>
                 </div>
                 <div class="row lkPanel mb-5">
                     <a href="/logout" style="text-decoration: none" class="lkBlock lkPanelButton rounded-pill">Выход</a>
@@ -28,64 +27,77 @@
             </div>
 
             <div class="col-10 lkInfo" id="orders">
-                <div id="close" class="row" style="height: 600px;  overflow: auto; justify-content: center; margin: 6% 3%;">
-
-                    {% for order in orders %}
-
-                        <div >
-
-
-                            <div class="d-flex  mb-3 ">
-                                <div class="col 7">
-                                    <div class="d-flex justify-content-start">
-                                        <h6 class="text-white">{{ order.number }}</h6>
-                                        <h6 class="text-white"> - </h6>
-                                        <h6 class="text-white">{{ order.date|date('d.m.Y h:i:s') }}</h6>
-                                    </div>
-                                    <p><small class="text-muted">{{ order.status }}, {{ order.typePayment }}</small></p>
-                                </div>
-                                <div class="col-2">
-                                    <p class="text-white">{{ order.summ }} P</p>
-                                </div>
-                                <div class="col-3 d-flex">
-
-                                    <a class=" text-white m-auto" data-bs-toggle="collapse"
-                                       data-bs-target="#open{{ order.number }}" role="button" aria-expanded="false"
-                                       aria-controls="open{{ order.number }}" id="open_submit">ᐯ</a>
-                                </div>
-                            </div>
-
-                            {% for item in order.items %}
-                                <div class="collapse" id="open{{ order.number }}">
-
-                                    <div class="d-flex justify-content-start mb-3 border-top border-secondary pt-2">
-                                        <div class="col-4 me-2">
-                                            <img src="/upload/pictures/{{ item.picture }}"
-                                                 style="object-fit: cover; object-position: center; height: 110px; width: 90px">
-                                        </div>
-                                        <div class="col-8">
-                                            <div class="d-flex justify-content-between">
-                                                <h6 class="text-white">{{ item.name }} x {{ item.quantity }}</h6>
-                                            </div>
-                                            <p><small class="text-muted">цвет {{ item.color }},
-                                                    размер {{ item.size }}</small></p>
-                                            <p class="text-white">{{ item.summ }} P</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            {% endfor %}
-
-
+                <div id="close" class="row"
+                     style="height: 600px;  overflow: auto; justify-content: center; margin: 6% 3%;">
+                    {% if cartIsEmpty %}
+                        <div class="lkPhoto">
+                            <svg x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve">
+                            <circle style="fill:#324A5E;" cx="256" cy="256" r="256"/>
+                                <path style="fill:#2B3B4E;" d="M172.527,350.68l152.023,152.023c95.461-26.469,168.496-106.848,184.267-206.301L400.808,188.395
+	                        l-106.053,71.809l-127.252-127.25l-43.956-9.895l-5.46,7.34l101.876,101.876l-43.739,39.815L172.527,350.68z"/>
+                                <path style="fill:#CFDBE6;" d="M354.618,366.928H204.762c-22.137,0-40.146-18.01-40.146-40.146V158.477
+	                        c0-15.482-12.597-28.079-28.079-28.079h-18.449v-12.067h18.451c22.137,0,40.146,18.01,40.146,40.146v168.305
+	                        c0,15.482,12.597,28.079,28.079,28.079h149.856v12.067H354.618z"/>
+                                <rect x="275.359" y="354.866" style="fill:#B8C9D9;" width="79.262" height="12.067"/>
+                                <path style="fill:#FFD15D;" d="M335.453,323.146H204.581c-15.662,0-28.357-12.697-28.357-28.357V188.395h224.584l-38.453,115.36
+	                        C358.495,315.335,347.66,323.146,335.453,323.146z"/>
+                                <g>
+                                    <path style="fill:#F9B54C;"
+                                          d="M275.356,188.395v134.751h60.099c12.205,0,23.042-7.811,26.902-19.391l38.453-115.36H275.356z"/>
+                                    <circle style="fill:#F9B54C;" cx="213.661" cy="360.9" r="20.704"/>
+                                    <circle style="fill:#F9B54C;" cx="307.631" cy="360.9" r="20.704"/>
+                                </g>
+                            </svg>
                         </div>
+                        <h3 style="color: white; text-align: center;">Похоже ваша корзина пуста.</h3>
+                    {% else %}
+                        {% for order in orders %}
+                            <div>
+                                <div class="d-flex  mb-3 ">
+                                    <div class="col 7">
+                                        <div class="d-flex justify-content-start">
+                                            <h6 class="text-white">{{ order.number }}</h6>
+                                            <h6 class="text-white"> - </h6>
+                                            <h6 class="text-white">{{ order.date|date('d.m.Y h:i:s') }}</h6>
+                                        </div>
+                                        <p><small class="text-muted">{{ order.status }}, {{ order.typePayment }}</small>
+                                        </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p class="text-white">{{ order.summ }} P</p>
+                                    </div>
+                                    <div class="col-3 d-flex">
 
-                    {% endfor %}
+                                        <a class=" text-white m-auto" data-bs-toggle="collapse"
+                                           data-bs-target="#open{{ order.number }}" role="button" aria-expanded="false"
+                                           aria-controls="open{{ order.number }}" id="open_submit">ᐯ</a>
+                                    </div>
+                                </div>
 
+                                {% for item in order.items %}
+                                    <div class="collapse" id="open{{ order.number }}">
 
+                                        <div class="d-flex justify-content-start mb-3 border-top border-secondary pt-2">
+                                            <div class="col-4 me-2">
+                                                <img src="/upload/pictures/{{ item.picture }}"
+                                                     style="object-fit: cover; object-position: center; height: 110px; width: 90px">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="d-flex justify-content-between">
+                                                    <h6 class="text-white">{{ item.name }} x {{ item.quantity }}</h6>
+                                                </div>
+                                                <p><small class="text-muted">цвет {{ item.color }},
+                                                        размер {{ item.size }}</small></p>
+                                                <p class="text-white">{{ item.summ }} P</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
-
-
             </div>
         </div>
     </div>

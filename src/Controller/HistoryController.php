@@ -21,61 +21,69 @@ class HistoryController extends AbstractController
     #[Route('/lk/history', name: 'app_history')]
     public function index(ManagerRegistry $doctrine): Response
     {
+        $user=$this->getUser();
+        if ($user) {
+            $header = $doctrine
+                ->getRepository(Section::class)
+                ->getHeaderSections();
+            $mail = $this->getUser()->getUserIdentifier();
+            //$mail = 'des1337481@gmail.com';
+            $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
 
-        $header = $doctrine
-            ->getRepository(Section::class)
-            ->getHeaderSections();
-        $mail = $this->getUser()->getUserIdentifier();
-        $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
+            $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
 
-        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
-
-        $ordersRequest = new OrdersRequest();
-        $ordersRequest->filter = new OrderFilter();
-        $ordersRequest->filter->email = $mail;
-        try {
-            $ordersResponse = $client->orders->list($ordersRequest);
-        } catch (ApiExceptionInterface | ClientExceptionInterface $exception) {
-            echo $exception;
-            die();
-        }
-
-        $orders = [];
-        for ($i = 0; $i < count($ordersResponse->orders); $i++) {
-            if (count($ordersResponse->orders[$i]->{'payments'}) == 0){
-                $typePaymentsOrder ='не произведена';
-            }else{
-                //$typePaymentsOrder = $ordersResponse->orders[$i]->{'payments'}[0]->{'type'};
-                $typePaymentsOrder ='как-то оплатил';
+            $ordersRequest = new OrdersRequest();
+            $ordersRequest->filter = new OrderFilter();
+            $ordersRequest->filter->email = $mail;
+            try {
+                $ordersResponse = $client->orders->list($ordersRequest);
+            } catch (ApiExceptionInterface|ClientExceptionInterface $exception) {
+                echo $exception;
+                die();
             }
-            $orderTarget = new OrderLk();
-            $orderTarget->number = $ordersResponse->orders[$i]->{'number'};
-            $orderTarget->date = $ordersResponse->orders[$i]->{'createdAt'};
-            $orderTarget->status = $ordersResponse->orders[$i]->{'status'};
-            $orderTarget->typePayment = $typePaymentsOrder;
-            $orderTarget->summ = $ordersResponse->orders[$i]->{'summ'};
-            for ($j = 0; $j < count($ordersResponse->orders[$i]->{'items'}); $j++) {
-                $sizeItem ='не указано';
-                $colorItem ='не указано';
-                if (isset($ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['size']))
-                    $sizeItem =$ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['size'];
-                if (isset($ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['color']))
-                    $colorItem =$ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['color'];
-                $itemTarget = new ItemLk();
-                $itemTarget->name = $ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'displayName'};
-                $itemTarget->picture = $doctrine->getRepository(Offer::class)->getPicture( $itemTarget->name);
-                //var_dump($doctrine->getRepository(Offer::class)->getPicture( $itemTarget->name));
-                $itemTarget->size = $sizeItem;
-                $itemTarget->color =$colorItem;
-                $itemTarget->summ = $ordersResponse->orders[$i]->{'items'}[$j]->{'initialPrice'};
-                $itemTarget->quantity = $ordersResponse->orders[$i]->{'items'}[$j]->{'quantity'};
-                array_push($orderTarget->items, $itemTarget);
+
+            $orders = [];
+            $cartIsEmpty = false;
+            if (count($ordersResponse->orders) == 0) {
+                $cartIsEmpty = true;
             }
-            array_push($orders, $orderTarget);
+            for ($i = 0; $i < count($ordersResponse->orders); $i++) {
+                if (count($ordersResponse->orders[$i]->{'payments'}) == 0) {
+                    $typePaymentsOrder = 'не произведена';
+                } else {
+                    //$typePaymentsOrder = $ordersResponse->orders[$i]->{'payments'}[0]->{'type'};
+                    $typePaymentsOrder = 'как-то оплатил';
+                }
+                $orderTarget = new OrderLk();
+                $orderTarget->number = $ordersResponse->orders[$i]->{'number'};
+                $orderTarget->date = $ordersResponse->orders[$i]->{'createdAt'};
+                $orderTarget->status = $ordersResponse->orders[$i]->{'status'};
+                $orderTarget->typePayment = $typePaymentsOrder;
+                $orderTarget->summ = $ordersResponse->orders[$i]->{'summ'};
+                for ($j = 0; $j < count($ordersResponse->orders[$i]->{'items'}); $j++) {
+                    $sizeItem = 'не указано';
+                    $colorItem = 'не указано';
+                    if (isset($ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['size']))
+                        $sizeItem = $ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['size'];
+                    if (isset($ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['color']))
+                        $colorItem = $ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'properties'}['color'];
+                    $itemTarget = new ItemLk();
+                    $itemTarget->name = $ordersResponse->orders[$i]->{'items'}[$j]->{'offer'}->{'displayName'};
+                    $itemTarget->picture = $doctrine->getRepository(Offer::class)->getPicture($itemTarget->name);
+                    $itemTarget->size = $sizeItem;
+                    $itemTarget->color = $colorItem;
+                    $itemTarget->summ = $ordersResponse->orders[$i]->{'items'}[$j]->{'initialPrice'};
+                    $itemTarget->quantity = $ordersResponse->orders[$i]->{'items'}[$j]->{'quantity'};
+                    array_push($orderTarget->items, $itemTarget);
+                }
+                array_push($orders, $orderTarget);
+            }
+            return $this->render('lk/history.html.twig', [
+                'orders' => $orders,
+                'header' => $header,
+                'cartIsEmpty' => $cartIsEmpty,
+            ]);
         }
-        return $this->render('lk/history.html.twig', [
-            'orders' => $orders,
-            'header' => $header,
-        ]);
+        else return $this->redirectToRoute('app_login');
     }
 }
