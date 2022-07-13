@@ -134,23 +134,23 @@
             }
             let cardButton = document.getElementById('add_to_cart_button');
             let initFirstLink = fetch(`{{ path('api_product_to_offer', {'id' : product.id, 'color' : 'formColor', 'size' : 'formSize' }) }}`
-                .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options.value))
+                .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options ? document.forms.size.options.value : null))
             initFirstLink.then((e)=>{return e.json()}).then((e)=>{cardButton.href = `{{ path('add_to_cart', {id: 'idFormJson'}) }}`
-                .replace('idFormJson', e.id)});
+                .replace('idFormJson', e.id); console.log(e)});
 
-            document.forms.size.options.forEach(x => x.addEventListener('change',(e) => {
+          if( document.forms.size.options )  { document.forms.size.options.forEach(x => x.addEventListener('change',(e) => {
                 if(x.checked){
                     let changedLink = fetch(`{{ path('api_product_to_offer', {'id' : product.id, 'color' : 'formColor', 'size' : 'formSize' }) }}`
-                        .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options.value))
+                        .replace('formColor', document.forms.colors.options.value).replace('formSize',document.forms.size.options ? document.forms.size.options.value : null))
                     changedLink.then((e)=>{return e.json()}).then((e)=>{cardButton.href = `{{ path('add_to_cart', {id: 'idFormJson'}) }}`
                         .replace('idFormJson', e.id)});
                 }
-            } ))
+            } )) }
 
             document.forms.colors.options.forEach(x => x.addEventListener('change',(e) => {
                 if(x.checked){
                     let changedLink = fetch(`{{ path('api_product_to_offer', {'id' : product.id, 'color' : 'formColor', 'size' : 'formSize' }) }}`
-                        .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options.value))
+                        .replace('formColor', document.forms.colors.options.value).replace('formSize',document.forms.size.options ? document.forms.size.options.value : null))
                     changedLink.then((e)=>{return e.json()}).then((e)=>{cardButton.href = `{{ path('add_to_cart', {id: 'idFormJson'}) }}`
                         .replace('idFormJson', e.id)});
                 }

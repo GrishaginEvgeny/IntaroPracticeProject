@@ -51,7 +51,18 @@
         "symfony/yaml": "6.0.*",
         "symfonycasts/verify-email-bundle": "^1.10",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "silex/silex": "^2.0.4",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "6.0.*",
+        "symfony/css-selector": "6.0.*",
+        "symfony/debug-bundle": "6.0.*",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^6.1",
+        "symfony/stopwatch": "6.0.*",
+        "symfony/web-profiler-bundle": "6.0.*",
+        "heroku/heroku-buildpack-php": "*"
     },
     "config": {
         "allow-plugins": {
@@ -106,15 +117,4 @@
         },
         "compile-whitelist": ["retailcrm/api-client-php"]
     },
-    "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "6.0.*",
-        "symfony/css-selector": "6.0.*",
-        "symfony/debug-bundle": "6.0.*",
-        "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^6.1",
-        "symfony/stopwatch": "6.0.*",
-        "symfony/web-profiler-bundle": "6.0.*"
-    }
 }

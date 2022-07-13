@@ -36,8 +36,24 @@ class CartController extends AbstractController
                 ['id' => 'ASC']
             );
             $totalPrice=0;
+            $arrayedOffers=[];
             //сразу считаем итоговую стоимость
             foreach ($offers as $offer){
+                $offerProperty = $offer->getOfferId()->getPropertyValues();
+                $properties = [];
+                foreach ($offerProperty as $property){
+                    $properties[$property->getProperty()->getCode()] = $property->getValue();
+                }
+                unset($property);
+                $arrayedOffers[] = [
+                    'count' => $offer->getCount(),
+                    'offer_id' => $offer->getOfferId()->getId(),
+                    'price' => $offer-> getOfferId()->getPrice(),
+                    'picture' => $offer->getOfferId()->getPicture(),
+                    'name' => $offer->getOfferId()->getName(),
+                    'product_id' => $offer->getOfferId()->getProduct()->getId(),
+                    'properties' => $properties,
+                ];
                 $totalPrice+=$offer->getOfferId()->getPrice()*$offer->getCount();
             }
             $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
@@ -56,8 +72,10 @@ class CartController extends AbstractController
             foreach ( $typeKey as $type) {
                 $paymentTypesLk[] = $paymentTypesCrm[$type]->{'name'};
             }
+            //dd($arrayedOffers);
+
             return $this->render('cart/index.html.twig', [
-                'offers' => $offers,
+                'offers' => $arrayedOffers,
                 'totalPrice' => $totalPrice,
                 'header' => $header,
                 'deliveryTypes' => $deliveryTypesLk,

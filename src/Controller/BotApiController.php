@@ -169,7 +169,7 @@ class BotApiController extends AbstractController
             ]);
         }
 
-        if ($id == null || $color == null || $size == null) {
+        if ($id == null || $color == null) {
             $data['message'] = 'all parameters should be filled';
             $data['statusCode'] = 400;
             return $this->render('botApi/botApi.html.twig', [
@@ -199,7 +199,7 @@ class BotApiController extends AbstractController
             $j++;
         }
         return $this->render('botApi/botApi.html.twig', [
-            'json' => json_encode($data['offers']),
+            'json' => json_encode($data['offers'][0]),
         ]);
     }
 }

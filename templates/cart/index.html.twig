@@ -34,27 +34,27 @@
                             {% for offer in offers %}
                                 <div class="d-flex justify-content-start mb-3">
                                     <div class="col-4 me-2">
-                                        <img src="/upload/pictures/{{ offer.getOfferId().picture }}"
+                                        <img src="/upload/pictures/{{ offer.picture }}"
                                              style="object-fit: cover; object-position: center; height: 110px; width: 90px">
                                     </div>
                                     <div class="col-8">
                                         <div class="d-flex justify-content-between">
                                             <h6 class="text-white">
                                                 <a style="text-decoration: none; color: white;"
-                                                   href="/product/{{ offer.getOfferId().getProduct().id }}">{{ offer.getOfferId().name }}</a>
+                                                   href="/product/{{ offer.product_id }}">{{ offer.name }}</a>
                                             </h6>
                                         </div>
-                                        {#                                    <p ><small class="text-muted">цвет синий, размер 46</small></p> #}
+                                         <p ><small class="text-muted">{% if 'color' in offer.properties|keys %} {{ 'Цвет: '~offer.properties.color }} {% else %} Цвет не указан {% endif %}, {% if 'size' in offer.properties|keys %} {{  'Размер: '~offer.properties.size }} {% else %} Размер не указан {% endif %}</small></p>
                                         <div class="d-flex justify-content-between">
                                             <p class="text-white"> Кол-во: {{ offer.count }} </p>
                                             <div>
                                                 <a style=" text-decoration: none; color: white;"
-                                                   href="/cart/plus/{{ offer.getOfferId().id }}">+</a>
+                                                   href="/cart/plus/{{ offer.offer_id }}">+</a>
                                                 {{ offer.count }}
                                                 <a style=" text-decoration: none; color: white;"
-                                                   href="/cart/minus/{{ offer.getOfferId().id }}">-</a>
+                                                   href="/cart/minus/{{ offer.offer_id }}">-</a>
                                             </div>
-                                            <p class="text-white">{{ offer.getOfferId().price * offer.count }} P</p>
+                                            <p class="text-white">{{ offer.price * offer.count }} P</p>
                                         </div>
                                     </div>
                                 </div>
