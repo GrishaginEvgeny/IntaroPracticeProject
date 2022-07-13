@@ -11,6 +11,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -37,6 +39,8 @@ class ProductCrudController extends AbstractCrudController
             ->add('name')
             ->add('vendor')
             ->add('sections')
+            ->add('active')
+            ->add('vatRate')
         ;
     }
 
@@ -59,5 +63,7 @@ class ProductCrudController extends AbstractCrudController
         if (Crud::PAGE_DETAIL === $pageName){
             yield ArrayField::new('offers');
         }
+        yield BooleanField::new('active');
+        yield NumberField::new('vatRate');
     }
 }

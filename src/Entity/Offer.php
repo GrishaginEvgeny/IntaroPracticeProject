@@ -210,6 +210,6 @@ class Offer
 
     public function __toString(): string
     {
-        return $this->getId() . " " . $this->getName() . " " . $this->getQuantity() . " " . $this->getUnit();
+        return '№'.$this->getId() . " " . $this->getName() . " " . $this->getQuantity() . " " . $this->getUnit();
     }
 }
