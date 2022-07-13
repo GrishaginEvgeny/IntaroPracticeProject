@@ -61,32 +61,27 @@
                             {% endfor %}
                         </div>
                         <div class="col-lg-6 col-md-12 mt-md-5 mt-lg-0 ps-3">
-                            <form>
+                            <form method="post" action="{{ path('app_order') }}">
                                 <h5 class="text-uppercase text-white text-center">подтверждение</h5>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control bg-black text-white" id="address"
+                                    <input name="address" type="text" class="form-control bg-black text-white" id="address"
                                            placeholder="АДРЕС ДОСТАВКИ" required="">
                                 </div>
-                                <div>
                                     <label for="country" class="form-label text-white">Способ оплаты</label>
-                                    <select class="form-select text-update bg-black text-white" id="country"
+                                    <select name="paymentType" class="form-select text-update bg-black text-white" id="country"
                                             required="">
                                         {% for paymentType in paymentTypes %}
-                                            <option class="text-white">{{ paymentType }}</option>
+                                            <option value="{{ paymentType }}" class="text-white">{{ paymentType }}</option>
                                         {% endfor %}
                                     </select>
-                                </div>
                                 <hr class="my-2">
-                                <div>
-                                    <label for="country" class="form-label text-white">Способ доставки</label>
-                                    <select class="form-select text-update bg-black text-white" id="country"
+                                    <label for="country1231" class="form-label text-white">Способ доставки</label>
+                                    <select name="deliveryType" class="form-select text-update bg-black text-white" id="country1231"
                                             required="">
                                         {% for deliveryType in deliveryTypes %}
-                                            <option class="text-white">{{ deliveryType }}</option>
+                                            <option value="{{ deliveryType }}" class="text-white">{{ deliveryType }}</option>
                                         {% endfor %}
                                     </select>
-                                </div>
-
                                 <hr class="my-3">
                                 <div class="d-flex justify-content-between mt-3">
                                     <p class="text-uppercase text-white">Итоговая стоимость:</p>

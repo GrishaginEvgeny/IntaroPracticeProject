@@ -50,7 +50,7 @@ class BotApiController extends AbstractController
             ]);
         }
 
-        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', 'eVsrX4drzsw35chftqiSbTbGgbLtaPbN');
+        $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $_ENV['RETAIL_CRM_API_KEY']);
 
         $productOffer = $doctrine->getRepository(\App\Entity\Offer::class)->findOneBy(array('id' => $_POST['external_id']));
 
@@ -88,6 +88,7 @@ class BotApiController extends AbstractController
         $order->countryIso = CountryCodeIso3166::RUSSIAN_FEDERATION;
         $order->phone = $_POST['phone'];
         $order->weight = 1000;
+
 
         $request->order = $order;
 

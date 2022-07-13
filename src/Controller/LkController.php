@@ -36,7 +36,6 @@ class LkController extends AbstractController
                 ->getHeaderSections();
             $mail = $this->getUser()->getUserIdentifier();
             $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
-
             $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
 
 
@@ -65,7 +64,7 @@ class LkController extends AbstractController
             };
             return $this->render('lk/index.html.twig', [
                 'email' => $customerLk[0]->{'email'},
-                'number' => $customerLk[0]->{'phones'}[0]->{'number'},
+                'number' => 123,
                 'fName' => $customerLk[0]->{'firstName'},
                 'lName' => $customerLk[0]->{'lastName'},
                 'patronymic' => $customerLk[0]->{'patronymic'},
