@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -53,19 +54,20 @@ class OfferCrudController extends AbstractCrudController
         yield MoneyField::new('price')->setCurrency("RUB");
         yield IntegerField::new('quantity');
         yield TextField::new('unit');
-        if (Crud::PAGE_EDIT === $pageName || Crud::PAGE_DETAIL === $pageName) {
-            yield ImageField::new('picture')
-        // ->setBasePath('uploads/pictures')
-        ->setUploadDir('\public\upload\pictures');
-        }
-        if (Crud::PAGE_EDIT === $pageName){
-            yield AssociationField::new('product');
-        }
-        if (Crud::PAGE_INDEX === $pageName || $pageName ===Crud::PAGE_DETAIL){
-            yield CollectionField::new('propertyValues');
-        }
-        else{
-            yield AssociationField::new('propertyValues')->setCrudController(PropertyValueCrudController::class);
-        }
+        yield BooleanField::new('active');
+        yield ImageField::new('picture')            
+            // ->setBasePath('public/upload/pictures')
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
+            ->setUploadDir('public/upload/pictures');
+        
+
+        yield AssociationField::new('product');
+
+            if (Crud::PAGE_INDEX === $pageName || $pageName ===Crud::PAGE_DETAIL){
+                yield CollectionField::new('propertyValues');
+            }
+            if(Crud::PAGE_EDIT === $pageName){
+                yield AssociationField::new('propertyValues')->setCrudController(PropertyValueCrudController::class);
+            }
     }
 }
