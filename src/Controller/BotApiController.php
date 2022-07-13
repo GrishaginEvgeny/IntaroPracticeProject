@@ -154,4 +154,52 @@ class BotApiController extends AbstractController
             'json' => json_encode($data),
         ]);
     }
+
+
+    #[Route('/api/productToOffer/{id}/{color}/{size}', name: 'api_product_to_offer')]
+    function productToOffer(int $id, string $color, string $size, ManagerRegistry $doctrine): Response
+    {
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+        if (strtoupper($requestMethod) != 'GET') {
+            $data['message'] = 'Wrong method! Should use GET method.';
+            $data['statusCode'] = 400;
+            return $this->render('botApi/botApi.html.twig', [
+                'json' => json_encode($data),
+            ]);
+        }
+
+        if ($id == null || $color == null || $size == null) {
+            $data['message'] = 'all parameters should be filled';
+            $data['statusCode'] = 400;
+            return $this->render('botApi/botApi.html.twig', [
+                'json' => json_encode($data),
+            ]);
+        }
+
+        $product = $doctrine->getRepository(\App\Entity\Product::class)->findOneBy(['id' => $id]);
+        $productOffers = $product->getOffers();
+
+        $j = 0;
+        foreach ($productOffers as $offer) {
+            $propertyValues = $offer->getPropertyValues();
+            $i = 0;
+            foreach ($propertyValues as $propertyValue) {
+
+                $data['offers'][$j]['id'] = $offer->getId();
+                if($propertyValue->getValue()==$color) $data['offers'][$j]['color'] = $propertyValue->getValue();
+                if($propertyValue->getValue()==$size) $data['offers'][$j]['size'] = $propertyValue->getValue();
+                $i++;
+                if(count($data['offers'][$j])==3){
+                    return $this->render('botApi/botApi.html.twig', [
+                        'json' => json_encode($data['offers'][$j]),
+                    ]);
+                }
+            }
+            $j++;
+        }
+        return $this->render('botApi/botApi.html.twig', [
+            'json' => json_encode($data['offers']),
+        ]);
+    }
 }

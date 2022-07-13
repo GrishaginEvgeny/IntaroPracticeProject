@@ -38,22 +38,24 @@
                 <p class="fs-3 text-left pt-0 pb-0 mt-1 fw-bolder">
                     {{ offerInfo[0].price~' ₽' }}
                 <p class="fs-6 text-left pt-0 pb-0">
+                <form name="size">
                 {% set arrayForCompareSize = [] %}
                 {% for offer in offerInfo %}
                     {% if 2 in offer.settings|keys and offer.settings[2].value not in arrayForCompareSize  %}
-                <input type="radio" class="btn-check" name="options" id="option{{ loop.index }}" autocomplete="off">
-                <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option{{ loop.index }}">
-                    {{ offer.settings[2].value }}
-                </label>
+                    <input type="radio" {% if loop.index is same as(1)%} checked {% endif %} value="{{ offer.settings[2].value }}" class="btn-check" name="options" id="option{{ loop.index }}" autocomplete="off">
+                    <label class="btn btn-outline-dark btn-size bth-check-product rounded-0" for="option{{ loop.index }}">
+                        {{ offer.settings[2].value }}
+                    </label>
                         {% set arrayForCompareSize = arrayForCompareSize|merge([offer.settings[2].value]) %}
                     {% endif %}
                 {% endfor %}
+                </form>
                 <br>
                 <p class="mt-3">
                     Расцветки:
                 </p>
                 <div>
-                    <form>
+                    <form name="colors">
                     {% set arrayForCompareColors = [] %}
                     {% for offer in offerInfo %}
                         {% if offer.settings[1].value not in arrayForCompareColors %}
@@ -61,7 +63,7 @@
                             <section class="section">
                                 <div class="input-group">
                                     <div class="radio-container">
-                                        <input type="radio" name="group" id="color-{{ loop.index }}">
+                                        <input style="display: none" {% if loop.index is same as(1)%} checked {% endif %} value="{{ offer.settings[1].value }}" type="radio" name="options" id="color-{{ loop.index }}">
                                         <label for="color-{{ loop.index }}"><span class="radio">{{ offer.settings[1].value }}</span></label>
                                       </div>
                                 </div>
@@ -73,9 +75,7 @@
                     </form>
                 </div>
                 <br>
-                <button type="button" class="btn btn-dark btg-bag mt-3 rounded-0 border-0">
-                    <a class="text-decoration-none" style="color: white" href="{{ path('add_to_cart', {'id': product.id}) }}">Добавить в корзину</a>
-                </button>
+                    <a class="btn btn-dark btg-bag mt-3 rounded-0 border-0 text-decoration-none" id="add_to_cart_button" style="color: white" href="" >Добавить в корзину</a>
                 <button class="accordion mt-3">
                     <div class="d-flex align-items-center">
                         <p class="text-left pt-0 pb-0 m-0">
@@ -132,6 +132,30 @@
                     }
                 });
             }
+            let cardButton = document.getElementById('add_to_cart_button');
+            let initFirstLink = fetch(`{{ path('api_product_to_offer', {'id' : product.id, 'color' : 'formColor', 'size' : 'formSize' }) }}`
+                .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options.value))
+            initFirstLink.then((e)=>{return e.json()}).then((e)=>{cardButton.href = `{{ path('add_to_cart', {id: 'idFormJson'}) }}`
+                .replace('idFormJson', e.id)});
+
+            document.forms.size.options.forEach(x => x.addEventListener('change',(e) => {
+                if(x.checked){
+                    let changedLink = fetch(`{{ path('api_product_to_offer', {'id' : product.id, 'color' : 'formColor', 'size' : 'formSize' }) }}`
+                        .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options.value))
+                    changedLink.then((e)=>{return e.json()}).then((e)=>{cardButton.href = `{{ path('add_to_cart', {id: 'idFormJson'}) }}`
+                        .replace('idFormJson', e.id)});
+                }
+            } ))
+
+            document.forms.colors.options.forEach(x => x.addEventListener('change',(e) => {
+                if(x.checked){
+                    let changedLink = fetch(`{{ path('api_product_to_offer', {'id' : product.id, 'color' : 'formColor', 'size' : 'formSize' }) }}`
+                        .replace('formColor', document.forms.colors.options.value).replace('formSize', document.forms.size.options.value))
+                    changedLink.then((e)=>{return e.json()}).then((e)=>{cardButton.href = `{{ path('add_to_cart', {id: 'idFormJson'}) }}`
+                        .replace('idFormJson', e.id)});
+                }
+            } ))
+
 
         </script>
     </div>
