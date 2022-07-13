@@ -192,7 +192,13 @@ class Offer
 
     public function getPicture(): ?string
     {
-        return $this->picture;
+        if (!$this->picture) {
+            return null;
+        }
+        if (strpos($this->picture, '/') !== false) {
+            return $this->picture;
+        }
+        return sprintf('/upload/pictures/%s', $this->picture);
     }
 
     public function setPicture(?string $picture): self

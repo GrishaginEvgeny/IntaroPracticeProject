@@ -24,7 +24,7 @@ class OfferAdminType extends AbstractType
             ->add('active')
             ->add('picture', FileType::class, [
                 'label' => 'Картинка',
-                'attr' => array('class' => 'class="form-control'),
+                'attr' => array('class' => 'form-control'),
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -37,7 +37,6 @@ class OfferAdminType extends AbstractType
                     ])
                 ],
             ])
-            ->add('product')
         ;
     }
 
