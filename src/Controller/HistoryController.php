@@ -26,8 +26,8 @@ class HistoryController extends AbstractController
             $header = $doctrine
                 ->getRepository(Section::class)
                 ->getHeaderSections();
-            $mail = $this->getUser()->getUserIdentifier();
-            //$mail = 'des1337481@gmail.com';
+            //$mail = $this->getUser()->getUserIdentifier();
+            $mail = 'des1337481@gmail.com';
             $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
 
             $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
@@ -51,8 +51,7 @@ class HistoryController extends AbstractController
                 if (count($ordersResponse->orders[$i]->{'payments'}) == 0) {
                     $typePaymentsOrder = 'не произведена';
                 } else {
-                    //$typePaymentsOrder = $ordersResponse->orders[$i]->{'payments'}[0]->{'type'};
-                    $typePaymentsOrder = 'как-то оплатил';
+                    $typePaymentsOrder = $ordersResponse->orders[$i]->{'payments'}[array_keys($ordersResponse->orders[$i]->{'payments'})[0]]->{'type'};
                 }
                 $orderTarget = new OrderLk();
                 $orderTarget->number = $ordersResponse->orders[$i]->{'number'};
