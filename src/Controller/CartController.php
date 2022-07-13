@@ -8,6 +8,7 @@ use App\Entity\ShopCart;
 use App\Repository\ShopCartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use RetailCrm\Api\Factory\SimpleClientFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -24,11 +25,11 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'cart')]
     public function index(ShopCartRepository $cartRepository, ManagerRegistry $doctrine): Response
     {
-        $header = $doctrine
-            ->getRepository(Section::class)
-            ->getHeaderSections();
-        $user = $this->getUser();
+        $user=$this->getUser();
         if ($user) {
+            $header = $doctrine
+                ->getRepository(Section::class)
+                ->getHeaderSections();
             //выводим все товары юзера
             $offers = $cartRepository->findBy(
                 ['email' => $user->getUserIdentifier()],
@@ -36,15 +37,31 @@ class CartController extends AbstractController
             );
             $totalPrice=0;
             //сразу считаем итоговую стоимость
-            if($offers) {
-                foreach ($offers as $offer) {
-                    $totalPrice += $offer->getOfferId()->getPrice() * $offer->getCount();
-                }
+            foreach ($offers as $offer){
+                $totalPrice+=$offer->getOfferId()->getPrice()*$offer->getCount();
+            }
+            $apiKey = $_ENV['RETAIL_CRM_API_KEY'];
+
+            $client = SimpleClientFactory::createClient('https://popova.retailcrm.ru', $apiKey);
+            $deliveryTypesCrm = $client->references->deliveryTypes()->deliveryTypes;
+            $typeKey =  array_keys($deliveryTypesCrm);
+            $deliveryTypesLk = [];
+            foreach ( $typeKey as $type) {
+                $deliveryTypesLk[] = $deliveryTypesCrm[$type]->{'name'};
+            }
+
+            $paymentTypesCrm = $client->references->paymentTypes()->paymentTypes;
+            $typeKey =  array_keys($paymentTypesCrm);
+            $paymentTypesLk = [];
+            foreach ( $typeKey as $type) {
+                $paymentTypesLk[] = $paymentTypesCrm[$type]->{'name'};
             }
             return $this->render('cart/index.html.twig', [
                 'offers' => $offers,
                 'totalPrice' => $totalPrice,
                 'header' => $header,
+                'deliveryTypes' => $deliveryTypesLk,
+                'paymentTypes' => $paymentTypesLk,
             ]);
         }
         else return $this->redirectToRoute('app_login');
@@ -61,7 +78,7 @@ class CartController extends AbstractController
     #[Route('/product/{id}/to_cart', name: 'add_to_cart')]
     public function addToCart(Offer $offer, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
+        $user=$this->getUser();
         if($user){
             $product = $cartRepository->findOneBy([
                 'email' => $user->getUserIdentifier(),
@@ -94,7 +111,7 @@ class CartController extends AbstractController
     #[Route('/cart/minus/{id}', name: 'delete_from_cart')]
     public function deleteFromCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
+        $user=$this->getUser();
         $product = $cartRepository->findOneBy([
             'email' => $user->getUserIdentifier(),
             'offer_id' => $offers->getId(),
@@ -120,7 +137,7 @@ class CartController extends AbstractController
     #[Route('/cart/plus/{id}', name: 'add_count_cart')]
     public function addCountCart(Offer $offers, ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->getUser();
+        $user=$this->getUser();
         $product = $cartRepository->findOneBy([
             'email' => $user->getUserIdentifier(),
             'offer_id' => $offers->getId(),
@@ -129,27 +146,5 @@ class CartController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
         return $this->redirectToRoute('cart');
-    }
-
-    /**
-     * @param ShopCartRepository $cartRepository
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[Route('/cart/makeOrder', name: 'make_order')]
-    public function makeOrder(ShopCartRepository $cartRepository, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-        if($user){
-            $products = $cartRepository->findBy([
-               'email' => $user->getUserIdentifier(),
-            ]);
-            foreach ($products as $product){
-                $entityManager->remove($product);
-                $entityManager->flush();
-            }
-            return $this->redirectToRoute('cart');
-        }
-        return $this->redirectToRoute('app_home');
     }
 }
