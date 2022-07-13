@@ -56,7 +56,7 @@ class OfferCrudController extends AbstractCrudController
         yield TextField::new('unit');
         yield BooleanField::new('active');
         yield ImageField::new('picture')            
-            ->setBasePath('upload/pictures')
+            // ->setBasePath('public/upload/pictures')
             ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
             ->setUploadDir('public/upload/pictures');
         

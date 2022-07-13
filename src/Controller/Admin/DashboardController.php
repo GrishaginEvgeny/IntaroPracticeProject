@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Offer;
 use App\Entity\Product;
 use App\Entity\Section;
+use App\Entity\Property;
 use App\Entity\PropertyValue;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ProductCrudController;
@@ -63,7 +64,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Предложения | Offers', 'fas fa-list', Offer::class),
             MenuItem::linkToCrud('Секции | Sections', 'fas fa-list', Section::class),
             MenuItem::linkToCrud('Пользователи | Users', 'fas fa-list', User::class),
-            MenuItem::linkToCrud('Свойства | Properties', 'fas fa-list', PropertyValue::class),
+            MenuItem::linkToCrud('Свойства продукта | Product properties', 'fas fa-list', PropertyValue::class),
+            MenuItem::linkToCrud('Свойства | Properties', 'fas fa-list', Property::class),
         ];
     }
 }
